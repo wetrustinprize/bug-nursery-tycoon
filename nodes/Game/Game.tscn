@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0x3jkpylsuch"]
+
+[ext_resource type="PackedScene" uid="uid://cdpiu0d37gls5" path="res://nodes/Terrarium/Terrarium.tscn" id="1_mcgtt"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.2, 0.2)
+
+[node name="Terrarium3" parent="." instance=ExtResource("1_mcgtt")]
+position = Vector2(1200, 0)
+
+[node name="Terrarium2" parent="." instance=ExtResource("1_mcgtt")]
+
+[node name="Terrarium" parent="." instance=ExtResource("1_mcgtt")]
+position = Vector2(-1200, 0)

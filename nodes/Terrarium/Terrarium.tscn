@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdpiu0d37gls5"]
+
+[ext_resource type="Script" path="res://nodes/Terrarium/Terrarium.cs" id="1_nu6uy"]
+[ext_resource type="Texture2D" uid="uid://e8yaai0u3iy6" path="res://graphics/prototype/terrarium.png" id="1_ta8pa"]
+
+[node name="Terrarium" type="Node2D"]
+script = ExtResource("1_nu6uy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ta8pa")
