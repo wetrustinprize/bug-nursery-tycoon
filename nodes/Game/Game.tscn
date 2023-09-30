@@ -1,11 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0x3jkpylsuch"]
+[gd_scene load_steps=8 format=3 uid="uid://d0x3jkpylsuch"]
 
+[ext_resource type="Script" path="res://nodes/Game/Game.cs" id="1_ivwcj"]
 [ext_resource type="PackedScene" uid="uid://cdpiu0d37gls5" path="res://nodes/Terrarium/Terrarium.tscn" id="1_mcgtt"]
+[ext_resource type="PackedScene" uid="uid://ca6tbul7su0qj" path="res://nodes/Player/Player.tscn" id="2_0w8yi"]
+[ext_resource type="Resource" uid="uid://5y3s74p1e0oh" path="res://pets/rolounite.tres" id="2_jirwv"]
+[ext_resource type="Script" path="res://nodes/Game/DebugPetSpawn.cs" id="3_cwkgv"]
+[ext_resource type="PackedScene" uid="uid://ch3lpd3qn0unk" path="res://nodes/Pet/Pet.tscn" id="3_h4ehw"]
 
-[node name="Game" type="Node2D"]
+[sub_resource type="Resource" id="Resource_4p68r"]
+script = ExtResource("3_cwkgv")
+TerrariumIndex = 0
+Pet = ExtResource("2_jirwv")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.2, 0.2)
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_terrariums")]
+script = ExtResource("1_ivwcj")
+_terrariums = [NodePath("Terrarium"), NodePath("Terrarium2"), NodePath("Terrarium3")]
+_petScene = ExtResource("3_h4ehw")
+_debugPets = Array[Object]([SubResource("Resource_4p68r")])
 
 [node name="Terrarium3" parent="." instance=ExtResource("1_mcgtt")]
 position = Vector2(1200, 0)
@@ -14,3 +25,5 @@ position = Vector2(1200, 0)
 
 [node name="Terrarium" parent="." instance=ExtResource("1_mcgtt")]
 position = Vector2(-1200, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_0w8yi")]

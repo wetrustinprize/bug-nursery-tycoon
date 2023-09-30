@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://ch3lpd3qn0unk"]
+
+[ext_resource type="Script" path="res://nodes/Pet/Pet.cs" id="1_6l2m3"]
+[ext_resource type="Texture2D" uid="uid://b2ttvupmbccu6" path="res://graphics/prototype/rolonite.png" id="1_ivdcj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cftpj"]
+radius = 213.0
+height = 896.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlb72"]
+size = Vector2(447, 937)
+
+[node name="Pet" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
+lock_rotation = true
+script = ExtResource("1_6l2m3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ivdcj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_cftpj")
+
+[node name="ClickableArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea"]
+position = Vector2(-3.5, -13.5)
+shape = SubResource("RectangleShape2D_vlb72")
+
+[connection signal="input_event" from="ClickableArea" to="." method="Area2DInputEvent"]
