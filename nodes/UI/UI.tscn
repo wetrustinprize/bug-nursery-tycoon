@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd1pb0gsmllrp"]
+
+[ext_resource type="PackedScene" uid="uid://cswvdw1geqicb" path="res://nodes/UI/PetInformation/PetInformation.tscn" id="1_x0chc"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="PetInformation" parent="." instance=ExtResource("1_x0chc")]
+mouse_filter = 1

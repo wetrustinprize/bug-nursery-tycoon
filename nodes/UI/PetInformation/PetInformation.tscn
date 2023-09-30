@@ -1,0 +1,160 @@
+[gd_scene load_steps=12 format=3 uid="uid://cswvdw1geqicb"]
+
+[ext_resource type="Script" path="res://nodes/UI/PetInformation/PetInformation.cs" id="1_0771g"]
+[ext_resource type="Texture2D" uid="uid://ble52d1q360mo" path="res://graphics/prototype/coeloposo.png" id="1_ld0jc"]
+[ext_resource type="Texture2D" uid="uid://cwca7u7065822" path="res://graphics/prototype/diamond_desert.png" id="2_1r12v"]
+[ext_resource type="Texture2D" uid="uid://detra7vanajxg" path="res://graphics/prototype/diamond_empty.png" id="2_uho8b"]
+[ext_resource type="Texture2D" uid="uid://d2k5ppcu0omu" path="res://graphics/prototype/diamond_forest.png" id="3_a1cit"]
+[ext_resource type="Texture2D" uid="uid://b7uxcwkou732f" path="res://graphics/prototype/symbol_happy.png" id="3_ytloe"]
+[ext_resource type="Texture2D" uid="uid://cec2snpp41wkf" path="res://graphics/prototype/diamond_swamp.png" id="4_5r5ig"]
+[ext_resource type="Texture2D" uid="uid://dtc2rktdne04r" path="res://graphics/prototype/symbol_angry.png" id="4_ojoo3"]
+[ext_resource type="Texture2D" uid="uid://qcq44swhyqe0" path="res://graphics/prototype/diamond_cold.png" id="5_ytqu7"]
+[ext_resource type="Texture2D" uid="uid://bc3t02aayu231" path="res://graphics/prototype/diamond_hot.png" id="6_s7jph"]
+[ext_resource type="Texture2D" uid="uid://bgch6g7w5wo7l" path="res://graphics/prototype/diamond_normal.png" id="7_eyhp1"]
+
+[node name="PetInformation" type="Control" node_paths=PackedStringArray("_nameLabel", "_petGraphic", "_biomeGraphic", "_temperatureGraphic", "_happinessProgressBar", "_angerProgressBar")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0771g")
+_nameLabel = NodePath("Panel/VBoxContainer/Header/Information/Pet Name")
+_petGraphic = NodePath("Panel/VBoxContainer/Header/PetGraphic")
+_biomeGraphic = NodePath("Panel/VBoxContainer/Header/Information/DiamondsContainer/Diamond1")
+_temperatureGraphic = NodePath("Panel/VBoxContainer/Header/Information/DiamondsContainer/Diamond2")
+_happinessProgressBar = NodePath("Panel/VBoxContainer/Status/HappyContainer/HappyProgress")
+_angerProgressBar = NodePath("Panel/VBoxContainer/Status/AngryContainer/AngryProgress")
+_desertBiomeTexture = ExtResource("2_1r12v")
+_forestBiomeTexture = ExtResource("3_a1cit")
+_swampBiomeTexture = ExtResource("4_5r5ig")
+_coldTemperatureTexture = ExtResource("5_ytqu7")
+_hotTemperatureTexture = ExtResource("6_s7jph")
+_normalTemperatureTexture = ExtResource("7_eyhp1")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -338.0
+offset_top = 14.0
+offset_right = -19.0
+offset_bottom = -14.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="PetGraphic" type="TextureRect" parent="Panel/VBoxContainer/Header"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+texture = ExtResource("1_ld0jc")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Information" type="VBoxContainer" parent="Panel/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Pet Name" type="Label" parent="Panel/VBoxContainer/Header/Information"]
+layout_mode = 2
+text = "Pet Information"
+horizontal_alignment = 1
+
+[node name="DiamondsContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Header/Information"]
+layout_mode = 2
+alignment = 1
+
+[node name="Diamond1" type="TextureRect" parent="Panel/VBoxContainer/Header/Information/DiamondsContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_uho8b")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Diamond2" type="TextureRect" parent="Panel/VBoxContainer/Header/Information/DiamondsContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_uho8b")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Diamond3" type="TextureRect" parent="Panel/VBoxContainer/Header/Information/DiamondsContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_uho8b")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Status" type="VBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Status"]
+layout_mode = 2
+text = "Status"
+
+[node name="HappyContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Status"]
+layout_mode = 2
+
+[node name="Symbol" type="TextureRect" parent="Panel/VBoxContainer/Status/HappyContainer"]
+layout_mode = 2
+texture = ExtResource("3_ytloe")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="HappyProgress" type="ProgressBar" parent="Panel/VBoxContainer/Status/HappyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AngryContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Status"]
+layout_mode = 2
+
+[node name="Symbol" type="TextureRect" parent="Panel/VBoxContainer/Status/AngryContainer"]
+layout_mode = 2
+texture = ExtResource("4_ojoo3")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="AngryProgress" type="ProgressBar" parent="Panel/VBoxContainer/Status/AngryContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveTo" type="VBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/MoveTo"]
+layout_mode = 2
+text = "Move to"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/MoveTo"]
+layout_mode = 2
+alignment = 1
+
+[node name="Terra1" type="Button" parent="Panel/VBoxContainer/MoveTo/HBoxContainer"]
+layout_mode = 2
+text = "1"
+
+[node name="Terra2" type="Button" parent="Panel/VBoxContainer/MoveTo/HBoxContainer"]
+layout_mode = 2
+text = "2"
+
+[node name="Terra3" type="Button" parent="Panel/VBoxContainer/MoveTo/HBoxContainer"]
+layout_mode = 2
+text = "3"
+
+[connection signal="pressed" from="Panel/VBoxContainer/MoveTo/HBoxContainer/Terra1" to="." method="MoveTo" binds= [0]]
+[connection signal="pressed" from="Panel/VBoxContainer/MoveTo/HBoxContainer/Terra2" to="." method="MoveTo" binds= [1]]
+[connection signal="pressed" from="Panel/VBoxContainer/MoveTo/HBoxContainer/Terra3" to="." method="MoveTo" binds= [2]]

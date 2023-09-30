@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2ttvupmbccu6"
-path="res://.godot/imported/rolonite.png-efac4537dedd8fc4d1025e69afde17a3.ctex"
+uid="uid://bc3t02aayu231"
+path="res://.godot/imported/diamond_hot.png-7a91a871dc83e2e14de3479f84550121.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/prototype/rolonite.png"
-dest_files=["res://.godot/imported/rolonite.png-efac4537dedd8fc4d1025e69afde17a3.ctex"]
+source_file="res://graphics/prototype/diamond_hot.png"
+dest_files=["res://.godot/imported/diamond_hot.png-7a91a871dc83e2e14de3479f84550121.ctex"]
 
 [params]
 

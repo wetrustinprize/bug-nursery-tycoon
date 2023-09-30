@@ -1,16 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdpiu0d37gls5"]
+[gd_scene load_steps=7 format=3 uid="uid://cdpiu0d37gls5"]
 
 [ext_resource type="Script" path="res://nodes/Terrarium/Terrarium.cs" id="1_nu6uy"]
 [ext_resource type="Texture2D" uid="uid://e8yaai0u3iy6" path="res://graphics/prototype/terrarium.png" id="1_ta8pa"]
+[ext_resource type="PackedScene" uid="uid://byea3fh46yqpg" path="res://nodes/Terrarium/Knob/Knob.tscn" id="3_5r1a2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yprg7"]
-size = Vector2(808, 1664)
+size = Vector2(1963, 1112)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hrnyy"]
-size = Vector2(702, 44)
+size = Vector2(1770, 39)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6vpwt"]
-size = Vector2(20, 1192)
+size = Vector2(20, 789)
 
 [node name="Terrarium" type="Node2D"]
 script = ExtResource("1_nu6uy")
@@ -21,7 +22,7 @@ texture = ExtResource("1_ta8pa")
 [node name="ClickableArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea"]
-position = Vector2(-7, -3)
+position = Vector2(1.5, -3)
 shape = SubResource("RectangleShape2D_yprg7")
 
 [node name="PetBoundaries" type="StaticBody2D" parent="."]
@@ -29,19 +30,27 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="Bottom" type="CollisionShape2D" parent="PetBoundaries"]
-position = Vector2(-11, 417)
+position = Vector2(5, 275.5)
 shape = SubResource("RectangleShape2D_hrnyy")
 
 [node name="Left" type="CollisionShape2D" parent="PetBoundaries"]
-position = Vector2(-351, -201)
+position = Vector2(-869, -95.5)
 shape = SubResource("RectangleShape2D_6vpwt")
 
 [node name="Right" type="CollisionShape2D" parent="PetBoundaries"]
-position = Vector2(323, -201)
+position = Vector2(874, -99)
 shape = SubResource("RectangleShape2D_6vpwt")
 
 [node name="Top" type="CollisionShape2D" parent="PetBoundaries"]
-position = Vector2(-11, -776)
+position = Vector2(-2, -485)
 shape = SubResource("RectangleShape2D_hrnyy")
 
+[node name="BiomeKnob" parent="." instance=ExtResource("3_5r1a2")]
+position = Vector2(-674, 405)
+
+[node name="TemperatureKnob" parent="." instance=ExtResource("3_5r1a2")]
+position = Vector2(-307, 399)
+
 [connection signal="input_event" from="ClickableArea" to="." method="Area2DInputEvent"]
+[connection signal="Pressed" from="BiomeKnob" to="." method="UpdateBiomeKnob"]
+[connection signal="Pressed" from="TemperatureKnob" to="." method="UpdateTemperatureKnob"]
