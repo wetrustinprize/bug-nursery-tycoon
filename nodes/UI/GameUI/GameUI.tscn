@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://bd1pb0gsmllrp"]
+
+[ext_resource type="Script" path="res://nodes/UI/GameUI/GameUI.cs" id="1_qqw1b"]
+[ext_resource type="PackedScene" uid="uid://bghhccj8d5nu3" path="res://nodes/UI/GameUI/Timer/Timer.tscn" id="2_k6upf"]
+[ext_resource type="PackedScene" uid="uid://gb2j8jm68lre" path="res://nodes/UI/GameUI/EndOfDayDialog/EndOfDayDialog.tscn" id="3_06d8c"]
+[ext_resource type="PackedScene" uid="uid://bteqqt70m3aot" path="res://nodes/UI/GameUI/GameOverDialog/GameOverDialog.tscn" id="4_h3sht"]
+[ext_resource type="PackedScene" uid="uid://cswvdw1geqicb" path="res://nodes/UI/GameUI/PetInformation/PetInformation.tscn" id="5_vjuf5"]
+[ext_resource type="Theme" uid="uid://pr2r0skc7csa" path="res://nodes/UI/Theme/Theme.tres" id="6_5nlin"]
+[ext_resource type="Texture2D" uid="uid://bo1xv6ubxbrnc" path="res://graphics/box_icon.png" id="7_t6php"]
+
+[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("_creatureInBox")]
+script = ExtResource("1_qqw1b")
+_creatureInBox = NodePath("CreaturesInBoxButton")
+
+[node name="Timer" parent="." instance=ExtResource("2_k6upf")]
+mouse_filter = 2
+
+[node name="EndOfDayDialog" parent="." instance=ExtResource("3_06d8c")]
+
+[node name="GameOverDialog" parent="." instance=ExtResource("4_h3sht")]
+
+[node name="PetInformation" parent="." instance=ExtResource("5_vjuf5")]
+mouse_filter = 1
+
+[node name="CreaturesInBoxButton" type="Button" parent="."]
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 181.0
+offset_bottom = 61.0
+theme = ExtResource("6_5nlin")
+text = "Creatures in box!"
+icon = ExtResource("7_t6php")
+alignment = 0
+
+[connection signal="pressed" from="CreaturesInBoxButton" to="." method="GoToBox"]

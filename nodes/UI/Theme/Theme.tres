@@ -1,9 +1,9 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://pr2r0skc7csa"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://pr2r0skc7csa"]
 
-[ext_resource type="StyleBox" uid="uid://c74btwkqyr57p" path="res://nodes/UI/Theme/ButtonDisabledStyleBox.tres" id="1_brfyj"]
-[ext_resource type="StyleBox" uid="uid://c2od20uyca23i" path="res://nodes/UI/Theme/ButtonHoverStyleBox.tres" id="2_r6mcb"]
-[ext_resource type="StyleBox" uid="uid://pv1mlx2tb210" path="res://nodes/UI/Theme/ButtonNormalStyleBox.tres" id="3_vlurp"]
-[ext_resource type="StyleBox" uid="uid://wkimtg6k30x7" path="res://nodes/UI/Theme/ButtonPressedStyleBox.tres" id="4_xalwn"]
+[ext_resource type="StyleBox" uid="uid://c74btwkqyr57p" path="res://nodes/UI/Theme/Button/ButtonDisabledStyleBox.tres" id="1_brfyj"]
+[ext_resource type="StyleBox" uid="uid://c2od20uyca23i" path="res://nodes/UI/Theme/Button/ButtonHoverStyleBox.tres" id="2_r6mcb"]
+[ext_resource type="StyleBox" uid="uid://pv1mlx2tb210" path="res://nodes/UI/Theme/Button/ButtonNormalStyleBox.tres" id="3_vlurp"]
+[ext_resource type="StyleBox" uid="uid://wkimtg6k30x7" path="res://nodes/UI/Theme/Button/ButtonPressedStyleBox.tres" id="4_xalwn"]
 [ext_resource type="StyleBox" uid="uid://diusr52imacwr" path="res://nodes/UI/Theme/PanelStyleBox.tres" id="5_jfgu2"]
 [ext_resource type="FontFile" uid="uid://k1ktoyx2d48k" path="res://graphics/style/Fredoka-Regular.ttf" id="5_ssg0x"]
 [ext_resource type="Texture2D" uid="uid://b1pqrimihw3nn" path="res://graphics/style/style_progress_background.png" id="7_0y7y7"]
@@ -16,6 +16,11 @@ texture_margin_left = 8.0
 texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_x50jo"]
+color = Color(0.623346, 0.537362, 0.419638, 1)
+thickness = 3
+vertical = true
 
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
@@ -30,3 +35,4 @@ PanelContainer/styles/panel = ExtResource("5_jfgu2")
 ProgressBar/fonts/font = ExtResource("7_id3kp")
 ProgressBar/styles/background = SubResource("StyleBoxTexture_yxa03")
 ProgressBar/styles/fill = ExtResource("9_c3qka")
+VSeparator/styles/separator = SubResource("StyleBoxLine_x50jo")

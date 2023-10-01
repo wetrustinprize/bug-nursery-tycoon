@@ -1,58 +1,339 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdpiu0d37gls5"]
+[gd_scene load_steps=30 format=3 uid="uid://cdpiu0d37gls5"]
 
 [ext_resource type="Script" path="res://nodes/Terrarium/Terrarium.cs" id="1_nu6uy"]
-[ext_resource type="Texture2D" uid="uid://e8yaai0u3iy6" path="res://graphics/prototype/terrarium.png" id="1_ta8pa"]
-[ext_resource type="PackedScene" uid="uid://byea3fh46yqpg" path="res://nodes/Terrarium/Knob/Knob.tscn" id="3_5r1a2"]
+[ext_resource type="Texture2D" uid="uid://b11xq6allwiky" path="res://graphics/terrarium/terrarium_base.png" id="3_aonmp"]
+[ext_resource type="Texture2D" uid="uid://b458mop31uhyo" path="res://graphics/terrarium/terrarium_forest_background.png" id="3_rl7sk"]
+[ext_resource type="Texture2D" uid="uid://c3rdd4n14yg2t" path="res://graphics/terrarium/terrarium_desert_floor.png" id="4_cj6io"]
+[ext_resource type="Texture2D" uid="uid://cbjwb1l3wbngl" path="res://graphics/terrarium/terrarium_swamp_background.png" id="4_mje5h"]
+[ext_resource type="Texture2D" uid="uid://buek7lenieu0p" path="res://graphics/biomes/forest.png" id="5_yuiwj"]
+[ext_resource type="Texture2D" uid="uid://dg2f1kix15mmp" path="res://graphics/biomes/desert.png" id="6_ec545"]
+[ext_resource type="Texture2D" uid="uid://cg3tnnpp4mq17" path="res://graphics/terrarium/terrarium_forest_objects.png.png" id="6_m4vfb"]
+[ext_resource type="Texture2D" uid="uid://bln0gx4uisyn3" path="res://graphics/biomes/swamp.png" id="7_bqind"]
+[ext_resource type="Texture2D" uid="uid://0opcv1vuvrnf" path="res://graphics/weather/weather_cold.png" id="8_c27le"]
+[ext_resource type="Texture2D" uid="uid://dhsoy4t1i7rln" path="res://graphics/weather/weather_neutral.png" id="9_js7aw"]
+[ext_resource type="Texture2D" uid="uid://r1u7aqjqju6q" path="res://graphics/terrarium/terrarium_swamp_objects.png" id="9_wjtiy"]
+[ext_resource type="Texture2D" uid="uid://bmju3okbfiumr" path="res://graphics/terrarium/terrarium_border.png" id="10_c42c1"]
+[ext_resource type="Texture2D" uid="uid://cadg7islhet3n" path="res://graphics/terrarium/terrarium_swamp_floor.png" id="10_d7btc"]
+[ext_resource type="Texture2D" uid="uid://ckt4ofnro0x66" path="res://graphics/weather/weather_hot.png" id="10_i6u1w"]
+[ext_resource type="Theme" uid="uid://k5sybuuelxse" path="res://nodes/UI/Theme/TerrariumTheme.tres" id="10_moubr"]
+[ext_resource type="Texture2D" uid="uid://bcpluvlvxymjo" path="res://graphics/terrarium/terrarium_desert_background.png" id="12_4u25q"]
+[ext_resource type="Texture2D" uid="uid://drpek0npcwkh8" path="res://graphics/terrarium/terrarium_border_mask.png" id="13_a8git"]
+[ext_resource type="Texture2D" uid="uid://bpes4332mqbs4" path="res://graphics/terrarium/terrarium_desert_objects.png" id="13_ahqfw"]
+[ext_resource type="Texture2D" uid="uid://dicytmvoe1t2a" path="res://graphics/terrarium/terrarium_forest_floor.png.png" id="15_a3pch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yprg7"]
-size = Vector2(1963, 1112)
+size = Vector2(2317, 2151)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hrnyy"]
-size = Vector2(1770, 39)
+size = Vector2(1340.22, 36.007)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vpwt"]
-size = Vector2(20, 789)
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nyi26"]
+light_mode = 1
 
-[node name="Terrarium" type="Node2D"]
-y_sort_enabled = true
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3c32a"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vanh3"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iod4j"]
+light_mode = 2
+
+[sub_resource type="Animation" id="Animation_efkq3"]
+resource_name = "Switch"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Inside/Background:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 0.378929, 1, 0.378929, 1),
+"update": 0,
+"values": [Vector2(0, -1328), Vector2(0, -1600), Vector2(0, 0), Vector2(0, -1600), Vector2(0, -1328)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Inside/Background:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, -1, 1]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 0.488498, 0.516254),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"UpdateBackground"
+}, {
+"args": [],
+"method": &"UpdateObjects"
+}, {
+"args": [],
+"method": &"UpdateGround"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Inside/Ground:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.328904, 0.513478),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Inside/NewGround:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Inside/Objects:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.115186, 0.22482, 0.523193, 0.660583),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cqm8t"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rmk7q"]
+_data = {
+"RESET": SubResource("Animation_cqm8t"),
+"Switch": SubResource("Animation_efkq3")
+}
+
+[node name="Terrarium" type="Node2D" node_paths=PackedStringArray("_petsNode", "_animationPlayer", "FocusPoint", "_backgroundSprite", "_objectsSprite", "_groundSprite", "_newGroundSprite")]
+z_index = 1
 script = ExtResource("1_nu6uy")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = -1
-texture = ExtResource("1_ta8pa")
+_petsNode = NodePath("Pets")
+_animationPlayer = NodePath("AnimationPlayer")
+FocusPoint = NodePath("FocusPoint")
+_backgroundSprite = NodePath("Inside/Background")
+_objectsSprite = NodePath("Inside/Objects")
+_groundSprite = NodePath("Inside/Ground")
+_newGroundSprite = NodePath("Inside/NewGround")
+_desertBackgroundTexture = ExtResource("12_4u25q")
+_desertObjectsTexture = ExtResource("13_ahqfw")
+_desertGroundTexture = ExtResource("4_cj6io")
+_forestBackgroundTexture = ExtResource("3_rl7sk")
+_forestObjectsTexture = ExtResource("6_m4vfb")
+_forestGroundTexture = ExtResource("15_a3pch")
+_swampBackgroundTexture = ExtResource("4_mje5h")
+_swampObjectsTexture = ExtResource("9_wjtiy")
+_swampGroundTexture = ExtResource("10_d7btc")
 
 [node name="ClickableArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea"]
-position = Vector2(1.5, -3)
+position = Vector2(22.5, -945.5)
 shape = SubResource("RectangleShape2D_yprg7")
 
 [node name="PetBoundaries" type="StaticBody2D" parent="."]
+position = Vector2(59, -379)
 collision_layer = 2
 collision_mask = 2
 
 [node name="Bottom" type="CollisionShape2D" parent="PetBoundaries"]
-position = Vector2(5, 275.5)
+position = Vector2(-533, 276)
+rotation = 0.162231
 shape = SubResource("RectangleShape2D_hrnyy")
 
-[node name="Left" type="CollisionShape2D" parent="PetBoundaries"]
-position = Vector2(-869, -95.5)
-shape = SubResource("RectangleShape2D_6vpwt")
-
-[node name="Right" type="CollisionShape2D" parent="PetBoundaries"]
-position = Vector2(874, -99)
-shape = SubResource("RectangleShape2D_6vpwt")
-
-[node name="Top" type="CollisionShape2D" parent="PetBoundaries"]
-position = Vector2(-2, -485)
+[node name="Bottom2" type="CollisionShape2D" parent="PetBoundaries"]
+position = Vector2(612, 177)
+rotation = -0.392578
 shape = SubResource("RectangleShape2D_hrnyy")
 
-[node name="BiomeKnob" parent="." instance=ExtResource("3_5r1a2")]
-position = Vector2(-674, 405)
+[node name="Bottom3" type="CollisionShape2D" parent="PetBoundaries"]
+position = Vector2(677, -239)
+rotation = 0.837862
+shape = SubResource("RectangleShape2D_hrnyy")
 
-[node name="TemperatureKnob" parent="." instance=ExtResource("3_5r1a2")]
-position = Vector2(-307, 399)
+[node name="Bottom4" type="CollisionShape2D" parent="PetBoundaries"]
+position = Vector2(-1017, -137)
+rotation = 1.5238
+shape = SubResource("RectangleShape2D_hrnyy")
+
+[node name="Bottom5" type="CollisionShape2D" parent="PetBoundaries"]
+position = Vector2(-740, -280)
+rotation = 2.85988
+shape = SubResource("RectangleShape2D_hrnyy")
+
+[node name="Bottom6" type="CollisionShape2D" parent="PetBoundaries"]
+position = Vector2(108, -382)
+rotation = 3.24097
+shape = SubResource("RectangleShape2D_hrnyy")
+
+[node name="KnobsBase" type="Sprite2D" parent="."]
+z_index = 9
+material = SubResource("CanvasItemMaterial_nyi26")
+position = Vector2(0, 100)
+texture = ExtResource("3_aonmp")
+
+[node name="BiomeControl" type="Control" parent="KnobsBase"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -33.0
+offset_right = 40.0
+offset_bottom = 7.0
+theme = ExtResource("10_moubr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="KnobsBase/BiomeControl"]
+layout_mode = 0
+offset_left = -464.0
+offset_top = -58.0
+offset_right = 9.0
+offset_bottom = 116.0
+alignment = 1
+
+[node name="Forest" type="Button" parent="KnobsBase/BiomeControl/HBoxContainer"]
+material = SubResource("CanvasItemMaterial_3c32a")
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+icon = ExtResource("5_yuiwj")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Desert" type="Button" parent="KnobsBase/BiomeControl/HBoxContainer"]
+material = SubResource("CanvasItemMaterial_3c32a")
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+icon = ExtResource("6_ec545")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Swamp" type="Button" parent="KnobsBase/BiomeControl/HBoxContainer"]
+material = SubResource("CanvasItemMaterial_3c32a")
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+icon = ExtResource("7_bqind")
+icon_alignment = 1
+expand_icon = true
+
+[node name="TemperatureControl" type="Control" parent="KnobsBase"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -33.0
+offset_right = 40.0
+offset_bottom = 7.0
+theme = ExtResource("10_moubr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="KnobsBase/TemperatureControl"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = -59.0
+offset_right = 495.0
+offset_bottom = 115.0
+alignment = 1
+
+[node name="Cold" type="Button" parent="KnobsBase/TemperatureControl/HBoxContainer"]
+material = SubResource("CanvasItemMaterial_3c32a")
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+icon = ExtResource("8_c27le")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Normal" type="Button" parent="KnobsBase/TemperatureControl/HBoxContainer"]
+material = SubResource("CanvasItemMaterial_3c32a")
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+icon = ExtResource("9_js7aw")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Hot" type="Button" parent="KnobsBase/TemperatureControl/HBoxContainer"]
+material = SubResource("CanvasItemMaterial_3c32a")
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+icon = ExtResource("10_i6u1w")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Inside" type="Node2D" parent="."]
+z_index = -1
+position = Vector2(100, 0)
+
+[node name="Background" type="Sprite2D" parent="Inside"]
+z_index = 1
+material = SubResource("CanvasItemMaterial_vanh3")
+position = Vector2(0, -1328)
+texture = ExtResource("3_rl7sk")
+
+[node name="Ground" type="Sprite2D" parent="Inside"]
+self_modulate = Color(1, 1, 1, 0)
+material = SubResource("CanvasItemMaterial_iod4j")
+position = Vector2(0, -1328)
+texture = ExtResource("15_a3pch")
+
+[node name="NewGround" type="Sprite2D" parent="Inside"]
+z_index = -1
+material = SubResource("CanvasItemMaterial_iod4j")
+position = Vector2(0, -1328)
+texture = ExtResource("15_a3pch")
+
+[node name="Objects" type="Sprite2D" parent="Inside"]
+z_index = 3
+material = SubResource("CanvasItemMaterial_vanh3")
+position = Vector2(0, -1328)
+texture = ExtResource("6_m4vfb")
+
+[node name="TerrariumMask" type="PointLight2D" parent="Inside"]
+position = Vector2(0, -1328)
+blend_mode = 2
+texture = ExtResource("13_a8git")
+
+[node name="Pets" type="Node2D" parent="."]
+z_index = 4
+y_sort_enabled = true
+position = Vector2(0, -519)
+
+[node name="Border" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(100, -1328)
+texture = ExtResource("10_c42c1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rmk7q")
+}
+
+[node name="FocusPoint" type="Node2D" parent="."]
+position = Vector2(11, -534)
 
 [connection signal="input_event" from="ClickableArea" to="." method="Area2DInputEvent"]
-[connection signal="Pressed" from="BiomeKnob" to="." method="UpdateBiomeKnob"]
-[connection signal="Pressed" from="TemperatureKnob" to="." method="UpdateTemperatureKnob"]
+[connection signal="pressed" from="KnobsBase/BiomeControl/HBoxContainer/Forest" to="." method="UpdateBiome" binds= [0]]
+[connection signal="pressed" from="KnobsBase/BiomeControl/HBoxContainer/Desert" to="." method="UpdateBiome" binds= [1]]
+[connection signal="pressed" from="KnobsBase/BiomeControl/HBoxContainer/Swamp" to="." method="UpdateBiome" binds= [2]]
+[connection signal="pressed" from="KnobsBase/TemperatureControl/HBoxContainer/Cold" to="." method="UpdateTemperature" binds= [0]]
+[connection signal="pressed" from="KnobsBase/TemperatureControl/HBoxContainer/Normal" to="." method="UpdateTemperature" binds= [1]]
+[connection signal="pressed" from="KnobsBase/TemperatureControl/HBoxContainer/Hot" to="." method="UpdateTemperature" binds= [2]]

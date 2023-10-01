@@ -6,32 +6,22 @@ public partial class Knob : Node2D
 
     [Export] private Sprite2D _knobSprite = null!;
 
-    private int _currentValue = 0;
+    private int _currentValue;
 
     #endregion
 
-    [Signal]
-    public delegate void PressedEventHandler(int value);
+    public int CurrentValue
+    {
+        get => _currentValue;
+        set
+        {
+            _currentValue = value;
+            _knobSprite.RotationDegrees = -90 + value * 45;
+        }
+    }
 
     public override void _Ready()
     {
         _knobSprite.RotationDegrees = -90;
     }
-
-    #region Callbacks
-
-    public void Area2DInputEvent(Node viewport, InputEvent @event, int shapeIdx)
-    {
-        if (!@event.IsActionPressed("focus")) return;
-
-        if (_currentValue >= 2)
-            _currentValue = 0;
-        else _currentValue++;
-
-        _knobSprite.RotationDegrees = 90 * (_currentValue - 1);
-
-        EmitSignal(SignalName.Pressed, _currentValue);
-    }
-
-    #endregion
 }

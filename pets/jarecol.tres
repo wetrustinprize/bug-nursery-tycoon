@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_s4fmf")
 Name = "Jarecol"
-FoodType = 0
+FoodType = 1
 Biome = 2
 Temperature = 2
 Personality = 0

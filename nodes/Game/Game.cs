@@ -31,7 +31,7 @@ public partial class Game : Node2D
 
     public static Game Instance { get; private set; } = null!;
 
-    public const float RoundTimer = 60f * 3;
+    public const float RoundTimer = 60f;
 
     #endregion
 
@@ -54,8 +54,6 @@ public partial class Game : Node2D
 
     public override void _Process(double delta)
     {
-        // CheckHoverPet();
-
         switch (State)
         {
             case GameState.Running:
@@ -67,9 +65,10 @@ public partial class Game : Node2D
 
     #region Game Loop
 
-    public void NextDay()
+    public void NewGame()
     {
         DeleteAllPets();
+        FocusTerrarium(null);
 
         // shall go to the shop, but currently will only reset
         foreach (var debugPet in _debugPets)
@@ -81,6 +80,7 @@ public partial class Game : Node2D
         State = GameState.GameOver;
         Timer.Instance.TimerVisible = false;
 
+        PetInformation.Instance.HidePet();
         GameOverDialog.Instance.Show(diedPet);
         FocusTerrarium(diedPet.Terrarium);
     }
@@ -95,7 +95,7 @@ public partial class Game : Node2D
         State = GameState.Shop;
         Timer.Instance.TimerVisible = false;
         FocusTerrarium(null);
-        EndOfDayDialog.Instance.Show(100);
+        EndOfDayDialog.Instance.Show();
     }
 
     private void UpdatePets(double delta)
@@ -174,8 +174,8 @@ public partial class Game : Node2D
             var terrarium = Terrariums[terrariumIndex];
 
             petNode.Terrarium = terrarium;
-            terrarium.AddChild(petNode);
-            terrarium.Pets.Add(petNode);
+
+            terrarium.AddPet(petNode);
             terrarium.UpdatePetDeathTimers();
         }
         else
@@ -203,8 +203,7 @@ public partial class Game : Node2D
 
         if (pet.Terrarium != null)
         {
-            pet.Terrarium.RemoveChild(pet);
-            pet.Terrarium.Pets.RemoveAll(p => p == pet);
+            pet.Terrarium.RemovePet(pet);
             pet.Terrarium.UpdatePetDeathTimers();
         }
         else
@@ -216,13 +215,11 @@ public partial class Game : Node2D
         if (terrariumIndex != -1)
         {
             var terrarium = Terrariums[terrariumIndex];
-            terrarium.AddChild(pet);
 
             pet.Terrarium = terrarium;
-            pet.Position = Vector2.Zero;
             pet.StopDeathTimer();
 
-            terrarium.Pets.Add(pet);
+            terrarium.AddPet(pet);
             terrarium.UpdatePetDeathTimers();
 
             if (State == GameState.Running)
@@ -263,7 +260,7 @@ public partial class Game : Node2D
         if (terrarium == null)
             Player.Instance.Unfocus();
         else
-            Player.Instance.FocusAt(terrarium.Position);
+            Player.Instance.FocusAt(terrarium.FocusPoint.GlobalPosition);
     }
 
     #endregion

@@ -9,5 +9,5 @@ Name = "Bola"
 FoodType = 1
 Biome = 1
 Temperature = 2
-Personality = 0
+Personality = 4
 Graphic = ExtResource("1_35mhq")

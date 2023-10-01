@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0x3jkpylsuch"]
+[gd_scene load_steps=11 format=3 uid="uid://d0x3jkpylsuch"]
 
 [ext_resource type="Script" path="res://nodes/Game/Game.cs" id="1_ivwcj"]
 [ext_resource type="PackedScene" uid="uid://cdpiu0d37gls5" path="res://nodes/Terrarium/Terrarium.tscn" id="1_mcgtt"]
@@ -8,29 +8,25 @@
 [ext_resource type="Resource" uid="uid://bb8msjusq3p2u" path="res://pets/jarecol.tres" id="5_foggx"]
 [ext_resource type="Resource" uid="uid://clnxiiekj166w" path="res://pets/coeloposo.tres" id="6_ge0hx"]
 [ext_resource type="Resource" uid="uid://dja6vkp1oq0af" path="res://pets/bola.tres" id="6_hj3md"]
-[ext_resource type="Resource" uid="uid://s7m7pjbmn8ps" path="res://pets/triadi.tres" id="7_p62kl"]
 [ext_resource type="PackedScene" uid="uid://dqhy147sctgww" path="res://nodes/PetBox/PetBox.tscn" id="8_7qk15"]
-[ext_resource type="Resource" uid="uid://crcq7dcua8ptk" path="res://pets/sapanha.tres" id="8_fnpws"]
-[ext_resource type="PackedScene" uid="uid://bd1pb0gsmllrp" path="res://nodes/UI/UI.tscn" id="8_fv3yk"]
+[ext_resource type="PackedScene" uid="uid://bd1pb0gsmllrp" path="res://nodes/UI/GameUI/GameUI.tscn" id="8_fv3yk"]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("Terrariums", "_petBox")]
 script = ExtResource("1_ivwcj")
-Terrariums = [NodePath("Terrarium"), NodePath("Terrarium2"), NodePath("Terrarium3")]
+Terrariums = [NodePath("Terrarium"), NodePath("Terrarium2")]
 _petScene = ExtResource("3_h4ehw")
 _petBox = NodePath("PetBox")
-_debugPets = Array[Object]([ExtResource("6_ge0hx"), ExtResource("5_foggx"), ExtResource("5_dj7au"), ExtResource("6_hj3md"), ExtResource("7_p62kl"), ExtResource("8_fnpws")])
-
-[node name="Terrarium3" parent="." instance=ExtResource("1_mcgtt")]
-position = Vector2(2252, 0)
+_debugPets = Array[Object]([ExtResource("6_ge0hx"), ExtResource("6_ge0hx"), ExtResource("6_hj3md"), ExtResource("5_dj7au"), ExtResource("5_foggx")])
 
 [node name="Terrarium2" parent="." instance=ExtResource("1_mcgtt")]
+position = Vector2(1460, -38)
 
 [node name="Terrarium" parent="." instance=ExtResource("1_mcgtt")]
-position = Vector2(-2263, 0)
+position = Vector2(-1447, 49)
 
 [node name="Player" parent="." instance=ExtResource("2_0w8yi")]
 
 [node name="PetBox" parent="." instance=ExtResource("8_7qk15")]
-position = Vector2(-4521, 0)
+position = Vector2(-108, 1227)
 
-[node name="UI" parent="." instance=ExtResource("8_fv3yk")]
+[node name="GameUI" parent="." instance=ExtResource("8_fv3yk")]

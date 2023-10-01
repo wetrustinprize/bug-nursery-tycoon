@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://bteqqt70m3aot"]
+
+[ext_resource type="Script" path="res://nodes/UI/GameUI/GameOverDialog/GameOverDialog.cs" id="1_o74ds"]
+[ext_resource type="Theme" uid="uid://pr2r0skc7csa" path="res://nodes/UI/Theme/Theme.tres" id="1_txxl5"]
+[ext_resource type="Texture2D" uid="uid://byswvynwcksqe" path="res://graphics/prototype/triaga.png" id="2_iqa5c"]
+[ext_resource type="FontFile" uid="uid://petwfvpacvbx" path="res://graphics/style/Fredoka-Bold.ttf" id="3_0j7ap"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1hdnm"]
+font = ExtResource("3_0j7ap")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_mjnph"]
+
+[node name="GameOverDialog" type="Control" node_paths=PackedStringArray("_petSprite", "_petNameLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_txxl5")
+script = ExtResource("1_o74ds")
+_petSprite = NodePath("Pet Sprite")
+_petNameLabel = NodePath("PanelContainer/VBoxContainer/Die")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Game Over" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_1hdnm")
+horizontal_alignment = 1
+
+[node name="Die" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "You let Pablo die."
+label_settings = SubResource("LabelSettings_mjnph")
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Quit Button" type="Button" parent="PanelContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Try Again Button" type="Button" parent="PanelContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Try Again"
+
+[node name="Pet Sprite" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -250.0
+offset_right = 109.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_iqa5c")
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/Quit Button" to="." method="MainMenu"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/Try Again Button" to="." method="Restart"]

@@ -12,13 +12,13 @@ public partial class Pet : RigidBody2D
 
     public float Happiness = 1.0f;
     public const float HappinessRegenRate = 0.01f;
-    public const float HappinessDecayRate = 0.005f;
+    public const float HappinessDecayRate = 0.001f;
 
     public float Anger = 0.0f;
     public const float AngerRegenRate = 0.05f;
 
     public float DeathTimer = 0.0f;
-    public const float DeathTimerMax = 40.0f;
+    public const float DeathTimerMax = 30.0f;
     public const float ShowDeathTimerAt = 10.0f;
 
     public Terrarium? Terrarium;
@@ -41,6 +41,51 @@ public partial class Pet : RigidBody2D
         {
             _petType = value;
             _petGraphic.Texture = value.Graphic;
+        }
+    }
+
+    public float HappinessRate
+    {
+        get
+        {
+            if (Terrarium == null) return 0.0f;
+
+            var rate = 0.0f;
+
+            var isAlone = Terrarium.Pets.Count == 1 && Terrarium.Pets.First() == this;
+            var allSameType = Terrarium.Pets.All(pet => pet.PetType.Name == PetType.Name);
+
+            var correctBiome = Terrarium.Biome == PetType.Biome;
+            var correctTemperature = Terrarium.Temperature == PetType.Temperature;
+
+            var satisfiedPersonalities = (int)0;
+            var unsatisfiedPersonalities = (int)0;
+
+            if (PetType.Personality.HasFlag(PetPersonality.Alone))
+                if (isAlone)
+                    satisfiedPersonalities++;
+                else
+                    unsatisfiedPersonalities++;
+
+            if (PetType.Personality.HasFlag(PetPersonality.Social))
+                if (!isAlone)
+                    satisfiedPersonalities++;
+                else
+                    unsatisfiedPersonalities++;
+
+            if (PetType.Personality.HasFlag(PetPersonality.Agressive))
+                if (allSameType)
+                    satisfiedPersonalities++;
+                else
+                    unsatisfiedPersonalities++;
+
+            rate += correctBiome ? 1.0f : -2.0f;
+            rate += correctTemperature ? 1.0f : -1.0f;
+
+            rate += unsatisfiedPersonalities * -1.0f;
+            rate += satisfiedPersonalities * 1.0f;
+
+            return rate / 100;
         }
     }
 
@@ -97,15 +142,13 @@ public partial class Pet : RigidBody2D
         DeathTimer -= (float)delta;
 
         _deathBubble.IsVisible = DeathTimer <= ShowDeathTimerAt;
-        _deathBubble.SetProgress(DeathTimer / DeathTimerMax);
+        _deathBubble.SetProgress(DeathTimer / ShowDeathTimerAt);
 
-        if (DeathTimer <= 0.0f)
-        {
-            DeathTimer = -1.0f;
-            return true;
-        }
+        var timeIsOver = DeathTimer <= 0.0f;
+        if (!timeIsOver) return false;
 
-        return false;
+        DeathTimer = -1.0f;
+        return true;
     }
 
     public void StartDeathTimer()
@@ -154,44 +197,14 @@ public partial class Pet : RigidBody2D
             return;
         }
 
-        var unHappinessTotal = 0;
-
-        var isAlone = Terrarium.Pets.Count == 1 && Terrarium.Pets.First() == this;
-        var allSameType = Terrarium.Pets.All(pet => pet.PetType.Name == PetType.Name);
-
-        var correctBiome = Terrarium.Biome == PetType.Biome;
-        var correctTemperature = Terrarium.Temperature == PetType.Temperature;
-
-        #region Unhapiness calculations
-
-        if (!correctBiome) unHappinessTotal++;
-        if (!correctTemperature) unHappinessTotal++;
-
-        if (PetType.Personality.HasFlag(PetPersonality.Alone) && !isAlone)
-            unHappinessTotal++;
-
-        if (PetType.Personality.HasFlag(PetPersonality.Social) && isAlone)
-            unHappinessTotal++;
-
-        if (PetType.Personality.HasFlag(PetPersonality.Agressive) && !allSameType)
-            unHappinessTotal++;
-
-        #endregion
-
-        var newUnHappiness = Happiness;
-
-        var diff = unHappinessTotal > 0
-            ? HappinessDecayRate * unHappinessTotal * (float)delta * -1
-            : HappinessRegenRate * (float)delta;
+        var diff = HappinessRate * (float)delta;
 
         _hapinessDiff += diff;
-        newUnHappiness += diff;
-
-        Happiness = Mathf.Clamp(newUnHappiness, 0.0f, 1.0f);
+        Happiness = Mathf.Clamp(Happiness + diff, 0.0f, 1.0f);
 
         if (_hapinessDiff is >= ThinkBubbleDiff or <= -ThinkBubbleDiff)
         {
-            _thinkBubble.ShowBubble(diff > ThinkBubbleDiff ? BubbleType.Happier : BubbleType.Sadder);
+            _thinkBubble.ShowBubble(_hapinessDiff > ThinkBubbleDiff ? BubbleType.Happier : BubbleType.Sadder);
             _hapinessDiff = 0.0f;
         }
     }

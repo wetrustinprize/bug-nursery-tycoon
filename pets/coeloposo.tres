@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_f1s2q")
 Name = "Coeloposo"
-FoodType = 1
+FoodType = 0
 Biome = 0
 Temperature = 2
-Personality = 0
+Personality = 2
 Graphic = ExtResource("1_pvoni")
