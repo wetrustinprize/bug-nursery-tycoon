@@ -1,29 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0x3jkpylsuch"]
+[gd_scene load_steps=9 format=3 uid="uid://d0x3jkpylsuch"]
 
 [ext_resource type="Script" path="res://nodes/Game/Game.cs" id="1_ivwcj"]
 [ext_resource type="PackedScene" uid="uid://cdpiu0d37gls5" path="res://nodes/Terrarium/Terrarium.tscn" id="1_mcgtt"]
 [ext_resource type="PackedScene" uid="uid://ca6tbul7su0qj" path="res://nodes/Player/Player.tscn" id="2_0w8yi"]
-[ext_resource type="Script" path="res://nodes/Game/DebugPetSpawn.cs" id="3_cwkgv"]
 [ext_resource type="PackedScene" uid="uid://ch3lpd3qn0unk" path="res://nodes/Pet/Pet.tscn" id="3_h4ehw"]
 [ext_resource type="Resource" uid="uid://bb8msjusq3p2u" path="res://pets/jarecol.tres" id="5_foggx"]
 [ext_resource type="Resource" uid="uid://clnxiiekj166w" path="res://pets/coeloposo.tres" id="6_ge0hx"]
+[ext_resource type="PackedScene" uid="uid://dqhy147sctgww" path="res://nodes/PetBox/PetBox.tscn" id="8_7qk15"]
 [ext_resource type="PackedScene" uid="uid://bd1pb0gsmllrp" path="res://nodes/UI/UI.tscn" id="8_fv3yk"]
 
-[sub_resource type="Resource" id="Resource_o1t3n"]
-script = ExtResource("3_cwkgv")
-TerrariumIndex = 1
-Pet = ExtResource("5_foggx")
-
-[sub_resource type="Resource" id="Resource_227qn"]
-script = ExtResource("3_cwkgv")
-TerrariumIndex = 1
-Pet = ExtResource("6_ge0hx")
-
-[node name="Game" type="Node2D" node_paths=PackedStringArray("Terrariums")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("Terrariums", "_petBox")]
 script = ExtResource("1_ivwcj")
 Terrariums = [NodePath("Terrarium"), NodePath("Terrarium2"), NodePath("Terrarium3")]
 _petScene = ExtResource("3_h4ehw")
-_debugPets = Array[Object]([SubResource("Resource_o1t3n"), SubResource("Resource_227qn")])
+_petBox = NodePath("PetBox")
+_debugPets = Array[Object]([ExtResource("6_ge0hx"), ExtResource("5_foggx")])
 
 [node name="Terrarium3" parent="." instance=ExtResource("1_mcgtt")]
 position = Vector2(2252, 0)
@@ -34,5 +25,8 @@ position = Vector2(2252, 0)
 position = Vector2(-2263, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_0w8yi")]
+
+[node name="PetBox" parent="." instance=ExtResource("8_7qk15")]
+position = Vector2(-4521, 0)
 
 [node name="UI" parent="." instance=ExtResource("8_fv3yk")]

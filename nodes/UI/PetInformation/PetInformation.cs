@@ -9,16 +9,29 @@ public partial class PetInformation : Control
     [Export] private TextureRect _petGraphic = null!;
     [Export] private TextureRect _biomeGraphic = null!;
     [Export] private TextureRect _temperatureGraphic = null!;
+    [Export] private TextureRect _foodGraphic = null!;
 
     [ExportGroup("Stats")] [Export] private ProgressBar _happinessProgressBar = null!;
     [Export] private ProgressBar _angerProgressBar = null!;
 
-    [ExportGroup("Textures")] [Export] private Texture2D _desertBiomeTexture = null!;
+    [ExportGroup("Personality")] [Export] private Container _personalityContainer = null!;
+
+    [ExportGroup("Textures")] [ExportSubgroup("Traits")] [Export]
+    private Texture2D _desertBiomeTexture = null!;
+
     [Export] private Texture2D _forestBiomeTexture = null!;
     [Export] private Texture2D _swampBiomeTexture = null!;
     [Export] private Texture2D _coldTemperatureTexture = null!;
     [Export] private Texture2D _hotTemperatureTexture = null!;
     [Export] private Texture2D _normalTemperatureTexture = null!;
+    [Export] private Texture2D _carnivoreTexture = null!;
+    [Export] private Texture2D _herbivoreTexture = null!;
+
+    [ExportSubgroup("Personalities")] [Export]
+    private Texture2D _agressiveTexture = null!;
+
+    [Export] private Texture2D _aloneTexture = null!;
+    [Export] private Texture2D _socialTexture = null!;
 
     private Pet? _pet;
 
@@ -45,7 +58,7 @@ public partial class PetInformation : Control
         _pet = null;
         Visible = false;
     }
-    
+
     public void ShowPet(Pet pet)
     {
         Visible = true;
@@ -70,6 +83,41 @@ public partial class PetInformation : Control
             PetTemperature.Normal => _normalTemperatureTexture,
             _ => throw new ArgumentOutOfRangeException($"Unknown temperature {pet.PetType.Temperature}")
         };
+
+        _foodGraphic.Texture = pet.PetType.FoodType switch
+        {
+            PetFoodType.Carnivore => _carnivoreTexture,
+            PetFoodType.Herbivore => _herbivoreTexture,
+            _ => throw new ArgumentOutOfRangeException($"Unknown food type {pet.PetType.FoodType}")
+        };
+
+        foreach (var child in _personalityContainer.GetChildren())
+        {
+            _personalityContainer.RemoveChild(child);
+            child.QueueFree();
+        }
+
+        if (pet.PetType.Personality.HasFlag(PetPersonality.Agressive))
+            AddPersonality(_agressiveTexture);
+
+        if (pet.PetType.Personality.HasFlag(PetPersonality.Alone))
+            AddPersonality(_aloneTexture);
+
+        if (pet.PetType.Personality.HasFlag(PetPersonality.Social))
+            AddPersonality(_socialTexture);
+    }
+
+    private void AddPersonality(Texture2D texture)
+    {
+        var textureRect = new TextureRect
+        {
+            Texture = texture,
+            StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
+            ExpandMode = TextureRect.ExpandModeEnum.FitWidth,
+            CustomMinimumSize = new Vector2(32, 32)
+        };
+
+        _personalityContainer.AddChild(textureRect);
     }
 
     public void MoveTo(int terrarium)

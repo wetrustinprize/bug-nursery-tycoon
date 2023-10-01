@@ -47,13 +47,6 @@ public partial class PetType : Resource
 
     #endregion
 
-    public PetType CreateInstance()
-    {
-        var instance = (PetType)Duplicate();
-        instance.RandomizePersonality();
-        return instance;
-    }
-
     public void RandomizePersonality()
     {
         // Change the personality of the pet randomly

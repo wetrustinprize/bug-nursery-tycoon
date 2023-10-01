@@ -6,7 +6,7 @@ public partial class Player : Node2D
     #region Variables
 
     [Export] private Camera2D _camera2D = null!;
-    [Export] private Vector2 _focusZoom;
+    [Export] private float _focusZoom = 0.9f;
     [Export] private float _focusSpeed = 4.0f;
 
     private Vector2 _desiredPosition;
@@ -47,7 +47,7 @@ public partial class Player : Node2D
     public void FocusAt(Vector2 position)
     {
         _desiredPosition = position;
-        _desiredZoom = _focusZoom;
+        _desiredZoom = new Vector2(_focusZoom, _focusZoom);
     }
 
     #endregion

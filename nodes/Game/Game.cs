@@ -1,6 +1,11 @@
 using System.Collections.Generic;
-using System.Linq;
 using Godot;
+
+public enum GameState
+{
+    Preparing,
+    Running,
+}
 
 [GlobalClass]
 public partial class Game : Node2D
@@ -10,14 +15,15 @@ public partial class Game : Node2D
     [ExportGroup("Terrarium")] [Export] public Terrarium[] Terrariums = null!;
 
     [ExportGroup("Pet")] [Export] private PackedScene _petScene = null!;
-    [Export] private DebugPetSpawn[] _debugPets = null!;
+    [Export] private PetBox _petBox = null!;
+    [Export] private PetType[] _debugPets = null!;
+
+    public GameState State { get; private set; } = GameState.Preparing;
 
     private readonly List<Pet> _pets = new();
 
-    public Terrarium? SelectedTerrarium { get; private set; }
-
-    public int SelectedTerrariumIndex =>
-        SelectedTerrarium != null ? Terrariums.ToList().IndexOf(SelectedTerrarium) : -1;
+    public Node2D? SelectedFocus { get; private set; }
+    public bool SelectedIsPetBox => SelectedFocus == _petBox;
 
     public static Game Instance { get; private set; } = null!;
 
@@ -29,20 +35,25 @@ public partial class Game : Node2D
 
         // DEBUG
         foreach (var debugPet in _debugPets)
-            AddPet(debugPet.Pet, debugPet.TerrariumIndex);
+            CreatePet(debugPet);
     }
 
     public override void _Input(InputEvent @event)
     {
         if (!@event.IsActionPressed("unfocus")) return;
 
-        SelectTerrarium(null);
+        FocusTerrarium(null);
         PetInformation.Instance.HidePet();
     }
 
     public override void _Process(double delta)
     {
-        UpdatePets(delta);
+        switch (State)
+        {
+            case GameState.Running:
+                UpdatePets(delta);
+                break;
+        }
     }
 
     #region Game Loop
@@ -57,21 +68,26 @@ public partial class Game : Node2D
 
     #region Pet Handling
 
-    public void AddPet(PetType pet, int terrariumIndex = -1)
+    public void CreatePet(PetType pet, int terrariumIndex = -1)
     {
         var petNode = _petScene.Instantiate<Pet>();
 
-        petNode.Terrarium = Terrariums[terrariumIndex];
-        petNode.PetType = pet.CreateInstance();
-
+        petNode.PetType = (PetType)pet.Duplicate();
         petNode.PetType.RandomizePersonality();
 
         if (terrariumIndex > -1)
         {
             var terrarium = Terrariums[terrariumIndex];
 
+            petNode.Terrarium = terrarium;
             terrarium.AddChild(petNode);
             terrarium.Pets.Add(petNode);
+            terrarium.UpdatePetDeathTimers();
+        }
+        else
+        {
+            _petBox.AddChild(petNode);
+            _petBox.Pets.Add(petNode);
         }
 
         _pets.Add(petNode);
@@ -81,13 +97,13 @@ public partial class Game : Node2D
     {
         if (!_pets.Exists(p => p == pet))
         {
-            GD.PrintErr($"Pet {pet.Name} is not being managed by Game!");
+            GD.PrintErr($"Pet {pet.Name} is not being managed by Game, can't be moved.");
             return;
         }
 
         if (pet.Anger > 0)
         {
-            GD.PrintErr($"Pet {pet.Name} is angry, can't be moved!");
+            GD.PrintErr($"Pet {pet.Name} is angry, can't be moved.");
             return;
         }
 
@@ -95,23 +111,52 @@ public partial class Game : Node2D
         {
             pet.Terrarium.RemoveChild(pet);
             pet.Terrarium.Pets.RemoveAll(p => p == pet);
+            pet.Terrarium.UpdatePetDeathTimers();
+        }
+        else
+        {
+            _petBox.RemoveChild(pet);
+            _petBox.Pets.RemoveAll(p => p == pet);
         }
 
-        Terrariums[terrariumIndex].AddChild(pet);
-        pet.Terrarium = Terrariums[terrariumIndex];
+        if (terrariumIndex != -1)
+        {
+            var terrarium = Terrariums[terrariumIndex];
+            terrarium.AddChild(pet);
 
-        pet.Anger = 1.0f;
+            pet.Terrarium = terrarium;
 
-        SelectTerrarium(Terrariums[terrariumIndex], false);
+            terrarium.Pets.Add(pet);
+            terrarium.UpdatePetDeathTimers();
+
+            pet.Anger = 1.0f;
+
+            PetInformation.Instance.HidePet();
+        }
     }
 
     #endregion
 
-    public void SelectTerrarium(Terrarium? terrarium, bool resetHud = true)
-    {
-        if (terrarium == SelectedTerrarium) return;
+    #region Focus
 
-        SelectedTerrarium = terrarium;
+    public void FocusPetBox()
+    {
+        if (SelectedIsPetBox) return;
+
+        FocusTerrarium(null);
+
+        SelectedFocus = _petBox;
+
+        Player.Instance.FocusAt(_petBox.Position);
+        _petBox.BoxVisible = true;
+    }
+
+    public void FocusTerrarium(Terrarium? terrarium, bool resetHud = true)
+    {
+        if (terrarium == SelectedFocus && terrarium != null) return;
+
+        SelectedFocus = terrarium;
+        _petBox.BoxVisible = false;
 
         if (resetHud)
             PetInformation.Instance.HidePet();
@@ -121,4 +166,6 @@ public partial class Game : Node2D
         else
             Player.Instance.FocusAt(terrarium.Position);
     }
+
+    #endregion
 }

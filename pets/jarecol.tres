@@ -9,4 +9,5 @@ Name = "Jarecol"
 FoodType = 0
 Biome = 2
 Temperature = 2
+Personality = 0
 Graphic = ExtResource("1_a14cu")

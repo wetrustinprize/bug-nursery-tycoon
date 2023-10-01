@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ch3lpd3qn0unk"]
+[gd_scene load_steps=7 format=3 uid="uid://ch3lpd3qn0unk"]
 
 [ext_resource type="Script" path="res://nodes/Pet/Pet.cs" id="1_6l2m3"]
 [ext_resource type="Texture2D" uid="uid://ble52d1q360mo" path="res://graphics/prototype/coeloposo.png" id="2_fn4dw"]
+[ext_resource type="Texture2D" uid="uid://di3ajorn6ncub" path="res://graphics/prototype/death.png" id="3_g0qex"]
+[ext_resource type="PackedScene" uid="uid://dfqasgrvfysje" path="res://nodes/Pet/ThinkBubble/ThinkBubble.tscn" id="4_qce63"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cftpj"]
 radius = 138.0
@@ -10,14 +12,16 @@ height = 276.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vlb72"]
 size = Vector2(303, 281)
 
-[node name="Pet" type="RigidBody2D" node_paths=PackedStringArray("_sprite2D")]
+[node name="Pet" type="RigidBody2D" node_paths=PackedStringArray("_petGraphic", "_deathTimerGraphic", "_thinkBubble")]
 collision_layer = 2
 collision_mask = 2
 lock_rotation = true
 script = ExtResource("1_6l2m3")
-_sprite2D = NodePath("Sprite2D")
+_petGraphic = NodePath("PetSprite")
+_deathTimerGraphic = NodePath("DeathTimerSprite")
+_thinkBubble = NodePath("ThinkBubble")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PetSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_fn4dw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -28,6 +32,14 @@ shape = SubResource("CapsuleShape2D_cftpj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea"]
 position = Vector2(-3.5, -13.5)
 shape = SubResource("RectangleShape2D_vlb72")
+
+[node name="DeathTimerSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -230)
+texture = ExtResource("3_g0qex")
+
+[node name="ThinkBubble" parent="." instance=ExtResource("4_qce63")]
+position = Vector2(-227, -85)
 
 [connection signal="input_event" from="ClickableArea" to="." method="Area2DInputEvent"]
 [connection signal="mouse_entered" from="ClickableArea" to="." method="Area2DMouseEnter"]

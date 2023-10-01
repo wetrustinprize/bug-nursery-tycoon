@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqhy147sctgww"]
+
+[ext_resource type="Script" path="res://nodes/PetBox/PetBox.cs" id="1_g8ceu"]
+[ext_resource type="Texture2D" uid="uid://5ybdf08xrp1y" path="res://graphics/prototype/box_outer.png" id="1_s5a7b"]
+[ext_resource type="Texture2D" uid="uid://catjfp420qvc5" path="res://graphics/prototype/box_inner.png" id="2_wx6op"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvm7q"]
+size = Vector2(1261, 528)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kum28"]
+size = Vector2(1125, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0gb80"]
+size = Vector2(32, 485)
+
+[node name="PetBox" type="Node2D" node_paths=PackedStringArray("_boxInnerSprite")]
+script = ExtResource("1_g8ceu")
+_boxInnerSprite = NodePath("BoxInner")
+
+[node name="BoxOuter" type="Sprite2D" parent="."]
+texture = ExtResource("1_s5a7b")
+
+[node name="BoxInner" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_wx6op")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(22.5, -92)
+shape = SubResource("RectangleShape2D_vvm7q")
+
+[node name="PetBoundaries" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Bottom" type="CollisionShape2D" parent="PetBoundaries"]
+position = Vector2(-54.5, 163)
+shape = SubResource("RectangleShape2D_kum28")
+
+[node name="Left" type="CollisionShape2D" parent="PetBoundaries"]
+position = Vector2(-592, -94.5)
+shape = SubResource("RectangleShape2D_0gb80")
+
+[node name="Right" type="CollisionShape2D" parent="PetBoundaries"]
+position = Vector2(504, -95)
+shape = SubResource("RectangleShape2D_0gb80")
+
+[connection signal="input_event" from="Area2D" to="." method="Area2DInputEvent"]

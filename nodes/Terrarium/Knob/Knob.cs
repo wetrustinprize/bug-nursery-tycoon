@@ -19,8 +19,6 @@ public partial class Knob : Node2D
     {
         if (!@event.IsActionPressed("focus")) return;
 
-        GD.Print("Hello");
-        
         if (_currentValue >= 2)
             _currentValue = 0;
         else _currentValue++;
