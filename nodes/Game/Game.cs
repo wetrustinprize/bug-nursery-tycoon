@@ -5,6 +5,8 @@ public enum GameState
 {
     Preparing,
     Running,
+    GameOver,
+    Shop,
 }
 
 [GlobalClass]
@@ -19,6 +21,7 @@ public partial class Game : Node2D
     [Export] private PetType[] _debugPets = null!;
 
     public GameState State { get; private set; } = GameState.Preparing;
+    public float RoundTime { get; private set; } = RoundTimer;
 
     private readonly List<Pet> _pets = new();
 
@@ -26,6 +29,8 @@ public partial class Game : Node2D
     public bool SelectedIsPetBox => SelectedFocus == _petBox;
 
     public static Game Instance { get; private set; } = null!;
+
+    public const float RoundTimer = 60f * 3;
 
     #endregion
 
@@ -51,6 +56,7 @@ public partial class Game : Node2D
         switch (State)
         {
             case GameState.Running:
+                UpdateTimer(delta);
                 UpdatePets(delta);
                 break;
         }
@@ -58,15 +64,68 @@ public partial class Game : Node2D
 
     #region Game Loop
 
+    public void NextDay()
+    {
+        DeleteAllPets();
+
+        // shall go to the shop, but currently will only reset
+        foreach (var debugPet in _debugPets)
+            CreatePet(debugPet);
+    }
+
+    public void GameOver(Pet diedPet)
+    {
+        State = GameState.GameOver;
+        Timer.Instance.TimerVisible = false;
+
+        GameOverDialog.Instance.Show(diedPet);
+        FocusTerrarium(diedPet.Terrarium);
+    }
+
+    private void UpdateTimer(double delta)
+    {
+        RoundTime -= (float)delta;
+        Timer.Instance.SetTimer(RoundTime);
+
+        if (RoundTime > 0) return;
+
+        State = GameState.Shop;
+        Timer.Instance.TimerVisible = false;
+        FocusTerrarium(null);
+        EndOfDayDialog.Instance.Show(100);
+    }
+
     private void UpdatePets(double delta)
     {
         foreach (var pet in _pets)
-            pet.UpdateStats(delta);
+        {
+            var died = pet.UpdateStats(delta);
+
+            if (died) GameOver(pet);
+        }
     }
 
     #endregion
 
     #region Pet Handling
+
+    void CheckPetBox()
+    {
+        if (State != GameState.Preparing) return;
+        if (_petBox.Pets.Count > 0) return;
+
+        FocusTerrarium(null);
+        State = GameState.Running;
+        Timer.Instance.TimerVisible = true;
+    }
+
+    public void DeleteAllPets()
+    {
+        foreach (var terrarium in Terrariums)
+            terrarium.Pets.Clear();
+
+        _pets.ForEach(p => p.QueueFree());
+    }
 
     public void CreatePet(PetType pet, int terrariumIndex = -1)
     {
@@ -125,14 +184,18 @@ public partial class Game : Node2D
             terrarium.AddChild(pet);
 
             pet.Terrarium = terrarium;
+            pet.Position = Vector2.Zero;
 
             terrarium.Pets.Add(pet);
             terrarium.UpdatePetDeathTimers();
 
-            pet.Anger = 1.0f;
+            if (State == GameState.Running)
+                pet.MakeAngry();
 
             PetInformation.Instance.HidePet();
         }
+
+        CheckPetBox();
     }
 
     #endregion

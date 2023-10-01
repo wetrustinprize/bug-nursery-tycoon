@@ -36,6 +36,7 @@ unfocus={
 
 2d_physics/layer_1="Interface"
 2d_physics/layer_2="World"
+2d_physics/layer_3="Creature"
 
 [rendering]
 

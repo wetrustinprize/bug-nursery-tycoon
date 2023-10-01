@@ -4,7 +4,8 @@ using System;
 public enum BubbleType
 {
     Happier,
-    Sadder
+    Sadder,
+    Angry,
 }
 
 [GlobalClass]
@@ -17,6 +18,7 @@ public partial class ThinkBubble : Sprite2D
     [ExportGroup("Textures")] [Export] private Texture2D _happierTexture = null!;
 
     [Export] private Texture2D _sadderTexture = null!;
+    [Export] private Texture2D _angryTexture = null!;
 
     private float _desiredOpacity = 0.0f;
     private float _showingTimer = 0.0f;
@@ -63,6 +65,7 @@ public partial class ThinkBubble : Sprite2D
         {
             BubbleType.Happier => _happierTexture,
             BubbleType.Sadder => _sadderTexture,
+            BubbleType.Angry => _angryTexture,
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
     }

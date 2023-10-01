@@ -13,6 +13,11 @@ public partial class Knob : Node2D
     [Signal]
     public delegate void PressedEventHandler(int value);
 
+    public override void _Ready()
+    {
+        _knobSprite.RotationDegrees = -90;
+    }
+
     #region Callbacks
 
     public void Area2DInputEvent(Node viewport, InputEvent @event, int shapeIdx)
@@ -23,7 +28,7 @@ public partial class Knob : Node2D
             _currentValue = 0;
         else _currentValue++;
 
-        _knobSprite.RotationDegrees = 90 * _currentValue;
+        _knobSprite.RotationDegrees = 90 * (_currentValue - 1);
 
         EmitSignal(SignalName.Pressed, _currentValue);
     }

@@ -2,20 +2,20 @@
 
 [ext_resource type="Script" path="res://nodes/UI/PetInformation/PetInformation.cs" id="1_0771g"]
 [ext_resource type="Texture2D" uid="uid://ble52d1q360mo" path="res://graphics/prototype/coeloposo.png" id="1_ld0jc"]
-[ext_resource type="Texture2D" uid="uid://cwca7u7065822" path="res://graphics/prototype/diamond_desert.png" id="2_1r12v"]
+[ext_resource type="Texture2D" uid="uid://dg2f1kix15mmp" path="res://graphics/biomes/desert.png" id="2_7kluh"]
 [ext_resource type="Texture2D" uid="uid://detra7vanajxg" path="res://graphics/prototype/diamond_empty.png" id="2_uho8b"]
-[ext_resource type="Texture2D" uid="uid://d2k5ppcu0omu" path="res://graphics/prototype/diamond_forest.png" id="3_a1cit"]
+[ext_resource type="Texture2D" uid="uid://buek7lenieu0p" path="res://graphics/biomes/forest.png" id="3_gep3q"]
 [ext_resource type="Texture2D" uid="uid://b7uxcwkou732f" path="res://graphics/prototype/symbol_happy.png" id="3_ytloe"]
-[ext_resource type="Texture2D" uid="uid://cec2snpp41wkf" path="res://graphics/prototype/diamond_swamp.png" id="4_5r5ig"]
+[ext_resource type="Texture2D" uid="uid://bln0gx4uisyn3" path="res://graphics/biomes/swamp.png" id="4_kju02"]
 [ext_resource type="Texture2D" uid="uid://dtc2rktdne04r" path="res://graphics/prototype/symbol_angry.png" id="4_ojoo3"]
-[ext_resource type="Texture2D" uid="uid://qcq44swhyqe0" path="res://graphics/prototype/diamond_cold.png" id="5_ytqu7"]
-[ext_resource type="Texture2D" uid="uid://bc3t02aayu231" path="res://graphics/prototype/diamond_hot.png" id="6_s7jph"]
-[ext_resource type="Texture2D" uid="uid://bgch6g7w5wo7l" path="res://graphics/prototype/diamond_normal.png" id="7_eyhp1"]
-[ext_resource type="Texture2D" uid="uid://bty8hn43njpdu" path="res://graphics/prototype/diamond_carnivore.png" id="8_tnpsn"]
-[ext_resource type="Texture2D" uid="uid://birul6fr4o3n5" path="res://graphics/prototype/diamond_herbivore.png" id="9_tefbe"]
-[ext_resource type="Texture2D" uid="uid://fcu8queekdxx" path="res://graphics/prototype/personality_evil.png" id="10_kvesw"]
-[ext_resource type="Texture2D" uid="uid://ciwj13hny6xxt" path="res://graphics/prototype/personality_antisocial.png" id="11_u3vs4"]
-[ext_resource type="Texture2D" uid="uid://ddwkg76mfb6og" path="res://graphics/prototype/personality_social.png" id="12_bb5op"]
+[ext_resource type="Texture2D" uid="uid://0opcv1vuvrnf" path="res://graphics/weather/weather_cold.png" id="5_o8yt5"]
+[ext_resource type="Texture2D" uid="uid://ckt4ofnro0x66" path="res://graphics/weather/weather_hot.png" id="6_ajju6"]
+[ext_resource type="Texture2D" uid="uid://dhsoy4t1i7rln" path="res://graphics/weather/weather_neutral.png" id="7_gu6xp"]
+[ext_resource type="Texture2D" uid="uid://bgdyao8qb5lyh" path="res://graphics/feeds/feeds_carnivore.png" id="8_obo13"]
+[ext_resource type="Texture2D" uid="uid://r3o4yuvk4t4m" path="res://graphics/feeds/feeds_herbivore.png" id="9_1ghjj"]
+[ext_resource type="Texture2D" uid="uid://c1vlrlocqj81c" path="res://graphics/sociabilty/puto.png" id="10_ownmk"]
+[ext_resource type="Texture2D" uid="uid://ckm2r3dgtc1a2" path="res://graphics/sociabilty/shy.png" id="11_o1uys"]
+[ext_resource type="Texture2D" uid="uid://bpxfuhyvreeel" path="res://graphics/sociabilty/sociable.png" id="12_6prew"]
 
 [node name="PetInformation" type="Control" node_paths=PackedStringArray("_nameLabel", "_petGraphic", "_biomeGraphic", "_temperatureGraphic", "_foodGraphic", "_happinessProgressBar", "_angerProgressBar", "_personalityContainer")]
 layout_mode = 3
@@ -33,17 +33,17 @@ _foodGraphic = NodePath("PanelContainer/VBoxContainer/Header/Information/Diamond
 _happinessProgressBar = NodePath("PanelContainer/VBoxContainer/Status/HappyContainer/HappyProgress")
 _angerProgressBar = NodePath("PanelContainer/VBoxContainer/Status/AngryContainer/AngryProgress")
 _personalityContainer = NodePath("PanelContainer/VBoxContainer/Header/Information/PersonalityContainer")
-_desertBiomeTexture = ExtResource("2_1r12v")
-_forestBiomeTexture = ExtResource("3_a1cit")
-_swampBiomeTexture = ExtResource("4_5r5ig")
-_coldTemperatureTexture = ExtResource("5_ytqu7")
-_hotTemperatureTexture = ExtResource("6_s7jph")
-_normalTemperatureTexture = ExtResource("7_eyhp1")
-_carnivoreTexture = ExtResource("8_tnpsn")
-_herbivoreTexture = ExtResource("9_tefbe")
-_agressiveTexture = ExtResource("10_kvesw")
-_aloneTexture = ExtResource("11_u3vs4")
-_socialTexture = ExtResource("12_bb5op")
+_desertBiomeTexture = ExtResource("2_7kluh")
+_forestBiomeTexture = ExtResource("3_gep3q")
+_swampBiomeTexture = ExtResource("4_kju02")
+_coldTemperatureTexture = ExtResource("5_o8yt5")
+_hotTemperatureTexture = ExtResource("6_ajju6")
+_normalTemperatureTexture = ExtResource("7_gu6xp")
+_carnivoreTexture = ExtResource("8_obo13")
+_herbivoreTexture = ExtResource("9_1ghjj")
+_agressiveTexture = ExtResource("10_ownmk")
+_aloneTexture = ExtResource("11_o1uys")
+_socialTexture = ExtResource("12_6prew")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

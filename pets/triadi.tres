@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PetType" load_steps=3 format=3 uid="uid://s7m7pjbmn8ps"]
+
+[ext_resource type="Texture2D" uid="uid://byswvynwcksqe" path="res://graphics/prototype/triaga.png" id="1_ugxxl"]
+[ext_resource type="Script" path="res://nodes/Pet/PetType.cs" id="1_vykxn"]
+
+[resource]
+script = ExtResource("1_vykxn")
+Name = "Triadi"
+FoodType = 1
+Biome = 0
+Temperature = 1
+Personality = 0
+Graphic = ExtResource("1_ugxxl")

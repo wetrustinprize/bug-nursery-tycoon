@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bghhccj8d5nu3"]
+
+[ext_resource type="Script" path="res://nodes/UI/Timer/Timer.cs" id="1_4yyhv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_25w21"]
+font_size = 32
+
+[node name="Timer" type="Control" node_paths=PackedStringArray("_timerLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4yyhv")
+_timerLabel = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -31.5
+offset_top = 13.0
+offset_right = 31.5
+offset_bottom = 61.0
+grow_horizontal = 2
+text = "5:00"
+label_settings = SubResource("LabelSettings_25w21")
+horizontal_alignment = 1

@@ -13,8 +13,11 @@ height = 276.0
 size = Vector2(303, 281)
 
 [node name="Pet" type="RigidBody2D" node_paths=PackedStringArray("_petGraphic", "_deathTimerGraphic", "_thinkBubble")]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 2
+gravity_scale = 0.0
+max_contacts_reported = 10
+contact_monitor = true
 lock_rotation = true
 script = ExtResource("1_6l2m3")
 _petGraphic = NodePath("PetSprite")
@@ -35,10 +38,12 @@ shape = SubResource("RectangleShape2D_vlb72")
 
 [node name="DeathTimerSprite" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 position = Vector2(0, -230)
 texture = ExtResource("3_g0qex")
 
 [node name="ThinkBubble" parent="." instance=ExtResource("4_qce63")]
+z_index = 1
 position = Vector2(-227, -85)
 
 [connection signal="input_event" from="ClickableArea" to="." method="Area2DInputEvent"]

@@ -11,13 +11,15 @@ size = Vector2(1261, 528)
 size = Vector2(1125, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0gb80"]
-size = Vector2(32, 485)
+size = Vector2(32, 515.886)
 
 [node name="PetBox" type="Node2D" node_paths=PackedStringArray("_boxInnerSprite")]
+y_sort_enabled = true
 script = ExtResource("1_g8ceu")
 _boxInnerSprite = NodePath("BoxInner")
 
 [node name="BoxOuter" type="Sprite2D" parent="."]
+z_index = -1
 texture = ExtResource("1_s5a7b")
 
 [node name="BoxInner" type="Sprite2D" parent="."]
@@ -39,11 +41,17 @@ position = Vector2(-54.5, 163)
 shape = SubResource("RectangleShape2D_kum28")
 
 [node name="Left" type="CollisionShape2D" parent="PetBoundaries"]
-position = Vector2(-592, -94.5)
+position = Vector2(-516, -96)
+rotation = 0.314159
 shape = SubResource("RectangleShape2D_0gb80")
 
 [node name="Right" type="CollisionShape2D" parent="PetBoundaries"]
-position = Vector2(504, -95)
+position = Vector2(585, -86)
+rotation = 0.314159
 shape = SubResource("RectangleShape2D_0gb80")
+
+[node name="Top" type="CollisionShape2D" parent="PetBoundaries"]
+position = Vector2(132, -343)
+shape = SubResource("RectangleShape2D_kum28")
 
 [connection signal="input_event" from="Area2D" to="." method="Area2DInputEvent"]

@@ -18,12 +18,14 @@ public partial class Pet : RigidBody2D
 
     private PetType _petType = null!;
     private float _hapinessDiff = 0.0f;
+    private Vector2 _movingDirection = Vector2.Zero;
 
     public const float AngerRegenRate = 0.05f;
     public const float HappinessRegenRate = 0.005f;
     public const float HappinessDecayRate = 0.01f;
-    public const float DeathTimerMax = 15.0f;
+    public const float DeathTimerMax = 40.0f;
     public const float ThinkBubbleDiff = 0.2f;
+    public const float PetSpeed = 50.0f;
 
     #endregion
 
@@ -35,6 +37,38 @@ public partial class Pet : RigidBody2D
             _petType = value;
             _petGraphic.Texture = value.Graphic;
         }
+    }
+
+    public override void _Ready()
+    {
+        GetNewRandomDirection();
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        var result = MoveAndCollide(_movingDirection * PetSpeed * (float)delta);
+
+        if (result != null)
+        {
+            var normal = result.GetNormal();
+
+            var maxRandom = 0.5f;
+            var x = Mathf.Clamp(_movingDirection.X + (float)GD.RandRange(-maxRandom, maxRandom), -1.0f, 1.0f);
+            var y = Mathf.Clamp(_movingDirection.Y + (float)GD.RandRange(-maxRandom, maxRandom), -1.0f, 1.0f);
+
+            _movingDirection = new Vector2(x, y);
+        }
+    }
+
+    private void GetNewRandomDirection()
+    {
+        var x = Mathf.Clamp(_movingDirection.X + (float)GD.RandRange(-1.0f, 1.0f), -1.0f, 1.0f);
+        var y = Mathf.Clamp(_movingDirection.Y + (float)GD.RandRange(-1.0f, 1.0f), -1.0f, 1.0f);
+
+        var newDirection = new Vector2(x, y);
+        newDirection.Normalized();
+
+        _movingDirection = newDirection;
     }
 
     #region Death Timer
@@ -67,6 +101,12 @@ public partial class Pet : RigidBody2D
     #endregion
 
     #region Update Stats
+
+    public void MakeAngry()
+    {
+        Anger = 1.0f;
+        _thinkBubble.ShowBubble(BubbleType.Angry);
+    }
 
     public bool UpdateStats(double delta)
     {

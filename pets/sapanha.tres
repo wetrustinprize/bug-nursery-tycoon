@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PetType" load_steps=3 format=3 uid="uid://crcq7dcua8ptk"]
+
+[ext_resource type="Script" path="res://nodes/Pet/PetType.cs" id="1_osgug"]
+[ext_resource type="Texture2D" uid="uid://bt7r1wty5t75o" path="res://graphics/prototype/sapanha.png" id="1_vc1ld"]
+
+[resource]
+script = ExtResource("1_osgug")
+Name = "Sapanha"
+FoodType = 1
+Biome = 2
+Temperature = 0
+Personality = 0
+Graphic = ExtResource("1_vc1ld")

@@ -14,9 +14,11 @@ size = Vector2(1770, 39)
 size = Vector2(20, 789)
 
 [node name="Terrarium" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_nu6uy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
 texture = ExtResource("1_ta8pa")
 
 [node name="ClickableArea" type="Area2D" parent="."]
