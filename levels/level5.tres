@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Level" load_steps=7 format=3 uid="uid://dqa3qbmpv5rjb"]
+
+[ext_resource type="Resource" uid="uid://dwlg4o2g478p" path="res://pets/tumela.tres" id="1_a4w8c"]
+[ext_resource type="Script" path="res://nodes/Game/Level.cs" id="1_jqjwx"]
+[ext_resource type="Resource" uid="uid://bb8msjusq3p2u" path="res://pets/jacol.tres" id="2_l3tfm"]
+[ext_resource type="Resource" uid="uid://s7m7pjbmn8ps" path="res://pets/triadi.tres" id="3_nav2a"]
+[ext_resource type="Resource" uid="uid://dde0dfnwjkdkv" path="res://pets/cervao.tres" id="4_dxo21"]
+[ext_resource type="Resource" uid="uid://bc3h8b108oiya" path="res://pets/bolonga.tres" id="5_u2nd3"]
+
+[resource]
+script = ExtResource("1_jqjwx")
+PetsInLevel = Array[Object]([ExtResource("1_a4w8c"), ExtResource("2_l3tfm"), ExtResource("3_nav2a"), ExtResource("4_dxo21"), ExtResource("5_u2nd3")])

@@ -40,7 +40,7 @@ public partial class GameOverDialog : Control
     public void Restart()
     {
         Hide();
-        Game.Instance.NewGame();
+        Game.Instance.RestartGame();
     }
 
     public void MainMenu()

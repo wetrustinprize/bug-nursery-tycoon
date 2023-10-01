@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="PetType" load_steps=3 format=3 uid="uid://dde0dfnwjkdkv"]
 
-[ext_resource type="Texture2D" uid="uid://ht0kd8hrxjn8" path="res://graphics/prototype/cervao.png" id="1_7t4xk"]
+[ext_resource type="Texture2D" uid="uid://ff2533dmhwu8" path="res://graphics/creatures/cervao.png" id="1_fp5n4"]
 [ext_resource type="Script" path="res://nodes/Pet/PetType.cs" id="1_v45g7"]
 
 [resource]
 script = ExtResource("1_v45g7")
 Name = "Cervao"
-FoodType = 0
+FoodType = 1
 Biome = 1
-Temperature = 2
-Personality = 0
-Graphic = ExtResource("1_7t4xk")
+Temperature = 0
+Personality = 8
+Graphic = ExtResource("1_fp5n4")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Level" load_steps=5 format=3 uid="uid://dsopmwcvx3w4o"]
+
+[ext_resource type="Script" path="res://nodes/Game/Level.cs" id="1_22dx4"]
+[ext_resource type="Resource" uid="uid://cp3gpqngs1cte" path="res://pets/rapelho.tres" id="1_wbeg6"]
+[ext_resource type="Resource" uid="uid://dfoytx4swll6j" path="res://pets/castix.tres" id="2_c7fu0"]
+[ext_resource type="Resource" uid="uid://crcq7dcua8ptk" path="res://pets/sapanha.tres" id="3_nyr7i"]
+
+[resource]
+script = ExtResource("1_22dx4")
+PetsInLevel = Array[Object]([ExtResource("1_wbeg6"), ExtResource("2_c7fu0"), ExtResource("3_nyr7i")])

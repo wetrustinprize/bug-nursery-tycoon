@@ -46,6 +46,7 @@ public partial class EndOfDayDialog : Control
 
     public void NextDay()
     {
-        Game.Instance.NewGame();
+        Hide();
+        Game.Instance.NextLevel();
     }
 }

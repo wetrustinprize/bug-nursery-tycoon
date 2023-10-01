@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PetType" load_steps=3 format=3 uid="uid://bb8msjusq3p2u"]
+
+[ext_resource type="Texture2D" uid="uid://4oijbdto7gcl" path="res://graphics/creatures/jacol.png" id="1_hw226"]
+[ext_resource type="Script" path="res://nodes/Pet/PetType.cs" id="2_5ifx8"]
+
+[resource]
+script = ExtResource("2_5ifx8")
+Name = "Jarecol"
+FoodType = 1
+Biome = 2
+Temperature = 2
+Personality = 2
+Graphic = ExtResource("1_hw226")

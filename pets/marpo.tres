@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PetType" load_steps=3 format=3 uid="uid://b1iyk0g7h8rp2"]
+
+[ext_resource type="Texture2D" uid="uid://cjstasuy8e55" path="res://graphics/creatures/marpo.png" id="1_ob7rm"]
+[ext_resource type="Script" path="res://nodes/Pet/PetType.cs" id="1_rascu"]
+
+[resource]
+script = ExtResource("1_rascu")
+Name = "Marpo"
+FoodType = 0
+Biome = 1
+Temperature = 0
+Personality = 4
+Graphic = ExtResource("1_ob7rm")

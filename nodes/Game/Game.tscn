@@ -1,22 +1,23 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0x3jkpylsuch"]
+[gd_scene load_steps=12 format=3 uid="uid://d0x3jkpylsuch"]
 
 [ext_resource type="Script" path="res://nodes/Game/Game.cs" id="1_ivwcj"]
 [ext_resource type="PackedScene" uid="uid://cdpiu0d37gls5" path="res://nodes/Terrarium/Terrarium.tscn" id="1_mcgtt"]
 [ext_resource type="PackedScene" uid="uid://ca6tbul7su0qj" path="res://nodes/Player/Player.tscn" id="2_0w8yi"]
+[ext_resource type="Resource" uid="uid://dsopmwcvx3w4o" path="res://levels/level1.tres" id="2_oylsc"]
+[ext_resource type="Resource" uid="uid://cdet10p7txxb4" path="res://levels/level2.tres" id="3_ffvjr"]
 [ext_resource type="PackedScene" uid="uid://ch3lpd3qn0unk" path="res://nodes/Pet/Pet.tscn" id="3_h4ehw"]
-[ext_resource type="Resource" uid="uid://dde0dfnwjkdkv" path="res://pets/cervao.tres" id="5_dj7au"]
-[ext_resource type="Resource" uid="uid://bb8msjusq3p2u" path="res://pets/jarecol.tres" id="5_foggx"]
-[ext_resource type="Resource" uid="uid://clnxiiekj166w" path="res://pets/coeloposo.tres" id="6_ge0hx"]
-[ext_resource type="Resource" uid="uid://dja6vkp1oq0af" path="res://pets/bola.tres" id="6_hj3md"]
+[ext_resource type="Resource" uid="uid://dfnc3o7gj2pdd" path="res://levels/level3.tres" id="4_eoicw"]
+[ext_resource type="Resource" uid="uid://du74p0olbt5ph" path="res://levels/level4.tres" id="5_3cjyq"]
+[ext_resource type="Resource" uid="uid://dqa3qbmpv5rjb" path="res://levels/level5.tres" id="6_65ldy"]
 [ext_resource type="PackedScene" uid="uid://dqhy147sctgww" path="res://nodes/PetBox/PetBox.tscn" id="8_7qk15"]
 [ext_resource type="PackedScene" uid="uid://bd1pb0gsmllrp" path="res://nodes/UI/GameUI/GameUI.tscn" id="8_fv3yk"]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("Terrariums", "_petBox")]
 script = ExtResource("1_ivwcj")
+_levels = Array[Object]([ExtResource("2_oylsc"), ExtResource("3_ffvjr"), ExtResource("4_eoicw"), ExtResource("5_3cjyq"), ExtResource("6_65ldy")])
 Terrariums = [NodePath("Terrarium"), NodePath("Terrarium2")]
 _petScene = ExtResource("3_h4ehw")
 _petBox = NodePath("PetBox")
-_debugPets = Array[Object]([ExtResource("6_ge0hx"), ExtResource("6_ge0hx"), ExtResource("6_hj3md"), ExtResource("5_dj7au"), ExtResource("5_foggx")])
 
 [node name="Terrarium2" parent="." instance=ExtResource("1_mcgtt")]
 position = Vector2(1460, -38)

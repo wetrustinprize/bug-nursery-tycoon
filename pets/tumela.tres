@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PetType" load_steps=3 format=3 uid="uid://dwlg4o2g478p"]
+
+[ext_resource type="Texture2D" uid="uid://c7gx4t3g7b3gq" path="res://graphics/creatures/tumela.png" id="1_2myc6"]
+[ext_resource type="Script" path="res://nodes/Pet/PetType.cs" id="1_lh476"]
+
+[resource]
+script = ExtResource("1_lh476")
+Name = "Tumela"
+FoodType = 0
+Biome = 1
+Temperature = 2
+Personality = 2
+Graphic = ExtResource("1_2myc6")

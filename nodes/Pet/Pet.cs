@@ -98,7 +98,7 @@ public partial class Pet : RigidBody2D
 
     public override void _Process(double delta)
     {
-        _petGraphic.Skew = Mathf.Sin(Time.GetTicksMsec() / 1000.0f + _walkAnimationOffset) / 10.0f;
+        _petGraphic.Skew = Mathf.Sin(Time.GetTicksMsec() / 500.0f + _walkAnimationOffset) / 10.0f;
         _petGraphic.Scale = HoveredPet == this ? new Vector2(1.1f, 1.1f) : Vector2.One;
     }
 
@@ -109,14 +109,15 @@ public partial class Pet : RigidBody2D
         if (result != null)
         {
             var normal = result
-                .GetNormal()
-                .Normalized();
+                .GetNormal();
 
             var maxRandom = 0.5f;
             var x = Mathf.Clamp(_movingDirection.X + (float)GD.RandRange(-maxRandom, maxRandom), -1.0f, 1.0f);
             var y = Mathf.Clamp(_movingDirection.Y + (float)GD.RandRange(-maxRandom, maxRandom), -1.0f, 1.0f);
 
             _movingDirection = new Vector2(x, y);
+            _movingDirection = _movingDirection.Normalized();
+
             _petGraphic.FlipH = _movingDirection.X > 0.0f;
         }
     }

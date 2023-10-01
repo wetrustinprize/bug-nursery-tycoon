@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ch3lpd3qn0unk"]
 
 [ext_resource type="Script" path="res://nodes/Pet/Pet.cs" id="1_6l2m3"]
-[ext_resource type="Texture2D" uid="uid://ble52d1q360mo" path="res://graphics/prototype/coeloposo.png" id="2_fn4dw"]
+[ext_resource type="Texture2D" uid="uid://ff2533dmhwu8" path="res://graphics/creatures/cervao.png" id="2_hsfqb"]
 [ext_resource type="PackedScene" uid="uid://cpdpod3ejx7nm" path="res://nodes/Pet/DeathBubble/DeathBubble.tscn" id="4_hmysw"]
 [ext_resource type="PackedScene" uid="uid://dfqasgrvfysje" path="res://nodes/Pet/ThinkBubble/ThinkBubble.tscn" id="4_qce63"]
 
@@ -25,7 +25,8 @@ _thinkBubble = NodePath("ThinkBubble")
 _deathBubble = NodePath("DeathBubble")
 
 [node name="PetSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_fn4dw")
+texture = ExtResource("2_hsfqb")
+region_rect = Rect2(0, 0, 100, 100)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_cftpj")

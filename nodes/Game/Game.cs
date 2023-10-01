@@ -6,8 +6,8 @@ public enum GameState
 {
     Preparing,
     Running,
+    Ending,
     GameOver,
-    Shop,
 }
 
 [GlobalClass]
@@ -15,11 +15,14 @@ public partial class Game : Node2D
 {
     #region Variables
 
+    [ExportGroup("Game")] [Export] public Level[] _levels = null!;
+
     [ExportGroup("Terrarium")] [Export] public Terrarium[] Terrariums = null!;
 
     [ExportGroup("Pet")] [Export] private PackedScene _petScene = null!;
     [Export] private PetBox _petBox = null!;
-    [Export] private PetType[] _debugPets = null!;
+
+    public int CurrentLevel { get; private set; } = -1;
 
     public GameState State { get; private set; } = GameState.Preparing;
     public float RoundTime { get; private set; } = RoundTimer;
@@ -38,10 +41,7 @@ public partial class Game : Node2D
     public override void _Ready()
     {
         Instance = this;
-
-        // DEBUG
-        foreach (var debugPet in _debugPets)
-            CreatePet(debugPet);
+        NextLevel();
     }
 
     public override void _Input(InputEvent @event)
@@ -65,14 +65,31 @@ public partial class Game : Node2D
 
     #region Game Loop
 
-    public void NewGame()
+    public void RestartGame()
+    {
+        DeleteAllPets();
+        FocusTerrarium(null);
+        CurrentLevel = -1;
+
+        NextLevel();
+    }
+
+    public void NextLevel()
     {
         DeleteAllPets();
         FocusTerrarium(null);
 
-        // shall go to the shop, but currently will only reset
-        foreach (var debugPet in _debugPets)
-            CreatePet(debugPet);
+        CurrentLevel++;
+
+        if (CurrentLevel >= _levels.Length)
+            CurrentLevel = 0;
+
+        var level = _levels[CurrentLevel];
+
+        foreach (var pet in level.PetsInLevel)
+            CreatePet(pet);
+
+        State = GameState.Preparing;
     }
 
     public void GameOver(Pet diedPet)
@@ -92,7 +109,7 @@ public partial class Game : Node2D
 
         if (RoundTime > 0) return;
 
-        State = GameState.Shop;
+        State = GameState.Ending;
         Timer.Instance.TimerVisible = false;
         FocusTerrarium(null);
         EndOfDayDialog.Instance.Show();
