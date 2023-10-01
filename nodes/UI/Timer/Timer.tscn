@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bghhccj8d5nu3"]
+[gd_scene load_steps=5 format=3 uid="uid://bghhccj8d5nu3"]
 
 [ext_resource type="Script" path="res://nodes/UI/Timer/Timer.cs" id="1_4yyhv"]
+[ext_resource type="Theme" uid="uid://pr2r0skc7csa" path="res://nodes/UI/Theme/Theme.tres" id="1_u55qr"]
+[ext_resource type="FontFile" uid="uid://petwfvpacvbx" path="res://graphics/style/Fredoka-Bold.ttf" id="3_fkjhv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_25w21"]
+font = ExtResource("3_fkjhv")
 font_size = 32
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 13
+shadow_color = Color(1, 1, 1, 1)
+shadow_offset = Vector2(1, 3.735)
 
 [node name="Timer" type="Control" node_paths=PackedStringArray("_timerLabel")]
 layout_mode = 3
@@ -12,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_u55qr")
 script = ExtResource("1_4yyhv")
 _timerLabel = NodePath("Label")
 

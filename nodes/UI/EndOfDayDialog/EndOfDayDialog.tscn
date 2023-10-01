@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://gb2j8jm68lre"]
+[gd_scene load_steps=5 format=3 uid="uid://gb2j8jm68lre"]
 
+[ext_resource type="Theme" uid="uid://pr2r0skc7csa" path="res://nodes/UI/Theme/Theme.tres" id="1_4dsv6"]
 [ext_resource type="Script" path="res://nodes/UI/EndOfDayDialog/EndOfDayDialog.cs" id="1_dyqim"]
+[ext_resource type="FontFile" uid="uid://petwfvpacvbx" path="res://graphics/style/Fredoka-Bold.ttf" id="3_j01jf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lnwjj"]
+font = ExtResource("3_j01jf")
 font_size = 32
 
 [node name="EndOfDayDialog" type="Control" node_paths=PackedStringArray("_coinsLabel")]
@@ -12,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_4dsv6")
 script = ExtResource("1_dyqim")
 _coinsLabel = NodePath("PanelContainer/VBoxContainer/Coins")
 
@@ -49,6 +53,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Next Day Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Next Day"
 

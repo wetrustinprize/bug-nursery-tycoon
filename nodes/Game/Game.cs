@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public enum GameState
@@ -53,6 +54,8 @@ public partial class Game : Node2D
 
     public override void _Process(double delta)
     {
+        // CheckHoverPet();
+
         switch (State)
         {
             case GameState.Running:
@@ -109,6 +112,39 @@ public partial class Game : Node2D
 
     #region Pet Handling
 
+    void CheckHoverPet()
+    {
+        var space = GetWorld2D().DirectSpaceState;
+        var mousePos = GetGlobalMousePosition();
+
+        var options = new PhysicsPointQueryParameters2D
+        {
+            Position = mousePos,
+            CollideWithAreas = true,
+            CollideWithBodies = false
+        };
+
+        var result = space.IntersectPoint(options, 5);
+        if (result.Count > 0)
+        {
+            var collidedPets = new List<Pet>();
+
+            foreach (var dictionary in result)
+            {
+                if (!dictionary.TryGetValue("collider", out var collider)) continue;
+
+                if (collider.As<Node2D>().GetParent() is Pet)
+                    collidedPets.Add(collider.As<Node2D>().GetParent<Pet>());
+            }
+
+            collidedPets.Sort((pet1, pet2) => pet1.Transform.Y < pet2.Transform.Y ? 1 : -1);
+
+            Pet.HoveredPet = !collidedPets.Any() ? null : collidedPets.First();
+        }
+        else
+            Pet.HoveredPet = null;
+    }
+
     void CheckPetBox()
     {
         if (State != GameState.Preparing) return;
@@ -132,7 +168,6 @@ public partial class Game : Node2D
         var petNode = _petScene.Instantiate<Pet>();
 
         petNode.PetType = (PetType)pet.Duplicate();
-        petNode.PetType.RandomizePersonality();
 
         if (terrariumIndex > -1)
         {

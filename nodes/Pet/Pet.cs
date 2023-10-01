@@ -7,23 +7,28 @@ public partial class Pet : RigidBody2D
     #region Variables
 
     [Export] private Sprite2D _petGraphic = null!;
-    [Export] private Sprite2D _deathTimerGraphic = null!;
     [Export] private ThinkBubble _thinkBubble = null!;
+    [Export] private DeathBubble _deathBubble = null!;
 
     public float Happiness = 1.0f;
+    public const float HappinessRegenRate = 0.01f;
+    public const float HappinessDecayRate = 0.005f;
+
     public float Anger = 0.0f;
+    public const float AngerRegenRate = 0.05f;
+
     public float DeathTimer = 0.0f;
+    public const float DeathTimerMax = 40.0f;
+    public const float ShowDeathTimerAt = 10.0f;
 
     public Terrarium? Terrarium;
 
     private PetType _petType = null!;
     private float _hapinessDiff = 0.0f;
     private Vector2 _movingDirection = Vector2.Zero;
+    private float _walkAnimationOffset = 0.0f;
 
-    public const float AngerRegenRate = 0.05f;
-    public const float HappinessRegenRate = 0.01f;
-    public const float HappinessDecayRate = 0.005f;
-    public const float DeathTimerMax = 40.0f;
+    public static Pet? HoveredPet = null;
     public const float ThinkBubbleDiff = 0.2f;
     public const float PetSpeed = 50.0f;
 
@@ -42,6 +47,14 @@ public partial class Pet : RigidBody2D
     public override void _Ready()
     {
         GetNewRandomDirection();
+
+        _walkAnimationOffset = GD.RandRange(-100, 100);
+    }
+
+    public override void _Process(double delta)
+    {
+        _petGraphic.Skew = Mathf.Sin(Time.GetTicksMsec() / 1000.0f + _walkAnimationOffset) / 10.0f;
+        _petGraphic.Scale = HoveredPet == this ? new Vector2(1.1f, 1.1f) : Vector2.One;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -59,6 +72,7 @@ public partial class Pet : RigidBody2D
             var y = Mathf.Clamp(_movingDirection.Y + (float)GD.RandRange(-maxRandom, maxRandom), -1.0f, 1.0f);
 
             _movingDirection = new Vector2(x, y);
+            _petGraphic.FlipH = _movingDirection.X > 0.0f;
         }
     }
 
@@ -71,6 +85,7 @@ public partial class Pet : RigidBody2D
         newDirection.Normalized();
 
         _movingDirection = newDirection;
+        _petGraphic.FlipH = _movingDirection.X > 0.0f;
     }
 
     #region Death Timer
@@ -81,7 +96,8 @@ public partial class Pet : RigidBody2D
 
         DeathTimer -= (float)delta;
 
-        _deathTimerGraphic.Visible = DeathTimer <= 10.0f;
+        _deathBubble.IsVisible = DeathTimer <= ShowDeathTimerAt;
+        _deathBubble.SetProgress(DeathTimer / DeathTimerMax);
 
         if (DeathTimer <= 0.0f)
         {
@@ -100,7 +116,7 @@ public partial class Pet : RigidBody2D
 
     public void StopDeathTimer()
     {
-        _deathTimerGraphic.Visible = false;
+        _deathBubble.IsVisible = false;
         DeathTimer = -1.0f;
     }
 
@@ -190,14 +206,6 @@ public partial class Pet : RigidBody2D
 
         if (Game.Instance.SelectedFocus == Terrarium || Game.Instance.SelectedIsPetBox)
             PetInformation.Instance.ShowPet(this);
-    }
-
-    public void Area2DMouseEnter()
-    {
-    }
-
-    public void Area2DMouseLeave()
-    {
     }
 
     #endregion

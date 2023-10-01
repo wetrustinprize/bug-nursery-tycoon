@@ -22,13 +22,13 @@ public partial class Timer : Control
 
     public override void _Process(double delta)
     {
-        var currentOpacity = _timerLabel.LabelSettings.FontColor.A;
+        var currentOpacity = _timerLabel.Modulate.A;
         var desiredOpacity = TimerVisible ? 1.0f : 0.0f;
         var newOpacity = currentOpacity > desiredOpacity
             ? Math.Max(currentOpacity - (float)delta * OpacityChangeRate, desiredOpacity)
             : Math.Min(currentOpacity + (float)delta * OpacityChangeRate, desiredOpacity);
 
-        _timerLabel.LabelSettings.FontColor = new Color(1, 1, 1, newOpacity);
+        _timerLabel.Modulate = new Color(1, 1, 1, newOpacity);
     }
 
     public void SetTimer(float time)

@@ -26,7 +26,7 @@ public enum PetPersonality
 {
     Agressive = 1 << 1,
     Alone = 1 << 2,
-    Social = 1 << 3,
+    Social = 1 << 3
 }
 
 [GlobalClass]

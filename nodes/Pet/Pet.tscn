@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://nodes/Pet/Pet.cs" id="1_6l2m3"]
 [ext_resource type="Texture2D" uid="uid://ble52d1q360mo" path="res://graphics/prototype/coeloposo.png" id="2_fn4dw"]
-[ext_resource type="Texture2D" uid="uid://di3ajorn6ncub" path="res://graphics/prototype/death.png" id="3_g0qex"]
+[ext_resource type="PackedScene" uid="uid://cpdpod3ejx7nm" path="res://nodes/Pet/DeathBubble/DeathBubble.tscn" id="4_hmysw"]
 [ext_resource type="PackedScene" uid="uid://dfqasgrvfysje" path="res://nodes/Pet/ThinkBubble/ThinkBubble.tscn" id="4_qce63"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cftpj"]
@@ -12,7 +12,7 @@ height = 276.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vlb72"]
 size = Vector2(303, 281)
 
-[node name="Pet" type="RigidBody2D" node_paths=PackedStringArray("_petGraphic", "_deathTimerGraphic", "_thinkBubble")]
+[node name="Pet" type="RigidBody2D" node_paths=PackedStringArray("_petGraphic", "_thinkBubble", "_deathBubble")]
 collision_layer = 4
 collision_mask = 2
 gravity_scale = 0.0
@@ -21,8 +21,8 @@ contact_monitor = true
 lock_rotation = true
 script = ExtResource("1_6l2m3")
 _petGraphic = NodePath("PetSprite")
-_deathTimerGraphic = NodePath("DeathTimerSprite")
 _thinkBubble = NodePath("ThinkBubble")
+_deathBubble = NodePath("DeathBubble")
 
 [node name="PetSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_fn4dw")
@@ -35,16 +35,14 @@ shape = SubResource("CapsuleShape2D_cftpj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea"]
 shape = SubResource("RectangleShape2D_vlb72")
 
-[node name="DeathTimerSprite" type="Sprite2D" parent="."]
-visible = false
-z_index = 1
-position = Vector2(0, -230)
-texture = ExtResource("3_g0qex")
-
 [node name="ThinkBubble" parent="." instance=ExtResource("4_qce63")]
 z_index = 1
 position = Vector2(-227, -85)
 
+[node name="DeathBubble" parent="." instance=ExtResource("4_hmysw")]
+offset_left = 1.0
+offset_top = -207.0
+offset_right = 1.0
+offset_bottom = -207.0
+
 [connection signal="input_event" from="ClickableArea" to="." method="Area2DInputEvent"]
-[connection signal="mouse_entered" from="ClickableArea" to="." method="Area2DMouseEnter"]
-[connection signal="mouse_exited" from="ClickableArea" to="." method="Area2DMouseLeave"]

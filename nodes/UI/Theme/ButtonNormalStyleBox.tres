@@ -1,0 +1,10 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://pv1mlx2tb210"]
+
+[ext_resource type="Texture2D" uid="uid://bl8gt3c8xku4l" path="res://graphics/style/style_button_idle.png" id="1_utp8v"]
+
+[resource]
+texture = ExtResource("1_utp8v")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 9.0
