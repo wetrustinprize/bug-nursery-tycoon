@@ -1,9 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://gb2j8jm68lre"]
+[gd_scene load_steps=8 format=3 uid="uid://gb2j8jm68lre"]
 
 [ext_resource type="Theme" uid="uid://pr2r0skc7csa" path="res://nodes/UI/Theme/Theme.tres" id="1_4dsv6"]
 [ext_resource type="Script" path="res://nodes/UI/GameUI/EndOfDayDialog/EndOfDayDialog.cs" id="1_dyqim"]
+[ext_resource type="FontFile" uid="uid://petwfvpacvbx" path="res://graphics/style/Fredoka-Bold.ttf" id="3_j01jf"]
+[ext_resource type="PackedScene" uid="uid://h38ntqbmv6ke" path="res://nodes/UI/MainMenu/MainMenu.tscn" id="3_jroq0"]
+[ext_resource type="Texture2D" uid="uid://dxuuocordplw0" path="res://graphics/sociabilty/happy.png" id="4_y5nl8"]
 
-[node name="EndOfDayDialog" type="Control" node_paths=PackedStringArray("_coinsLabel")]
+[sub_resource type="LabelSettings" id="LabelSettings_2q3u6"]
+font = ExtResource("3_j01jf")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_7e3cr"]
+
+[node name="EndOfDayDialog" type="Control" node_paths=PackedStringArray("_dayLabel", "_avgLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +21,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_4dsv6")
 script = ExtResource("1_dyqim")
-_coinsLabel = NodePath("")
+_dayLabel = NodePath("PanelContainer/VBoxContainer/Day")
+_avgLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/Average")
+_menuScene = ExtResource("3_jroq0")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -31,19 +42,55 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 
-[node name="Flavor" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Day" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Congratulations! You've done it!
-You can go to the next day."
+text = "Day 1/5"
+label_settings = SubResource("LabelSettings_2q3u6")
 horizontal_alignment = 1
+
+[node name="Finished" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Finished!"
+label_settings = SubResource("LabelSettings_7e3cr")
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Score" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Avg."
+label_settings = SubResource("LabelSettings_7e3cr")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("4_y5nl8")
+expand_mode = 3
+
+[node name="Average" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "100%"
+label_settings = SubResource("LabelSettings_7e3cr")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
+
+[node name="Main Menu Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Main Menu"
 
 [node name="Next Day Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Next Day"
 
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Main Menu Button" to="." method="MainMenu"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Next Day Button" to="." method="NextDay"]

@@ -1,9 +1,20 @@
 using Godot;
 using System;
 
+public struct EndOfDayResult
+{
+    public int CurrentLevel { get; init; }
+    public int TotalLevels { get; init; }
+    public float AverageHappiness { get; init; }
+}
+
 public partial class EndOfDayDialog : Control
 {
     #region Variables
+
+    [Export] private Label _dayLabel = null!;
+    [Export] private Label _avgLabel = null!;
+    [Export] private PackedScene _menuScene = null!;
 
     private bool _isVisible = false;
 
@@ -32,10 +43,13 @@ public partial class EndOfDayDialog : Control
         Visible = newOpacity > 0.1f;
     }
 
-    public void Show()
+    public void Show(EndOfDayResult result)
     {
         _isVisible = true;
         MouseFilter = MouseFilterEnum.Stop;
+
+        _dayLabel.Text = $"Day {result.CurrentLevel + 1}/{result.TotalLevels}";
+        _avgLabel.Text = result.AverageHappiness.ToString("P1");
     }
 
     public void Hide()
@@ -48,5 +62,12 @@ public partial class EndOfDayDialog : Control
     {
         Hide();
         Game.Instance.NextLevel();
+    }
+
+    public void MainMenu()
+    {
+        var menu = _menuScene.Instantiate();
+        GetTree().Root.AddChild(menu);
+        QueueFree();
     }
 }

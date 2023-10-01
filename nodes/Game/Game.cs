@@ -112,7 +112,12 @@ public partial class Game : Node2D
         State = GameState.Ending;
         Timer.Instance.TimerVisible = false;
         FocusTerrarium(null);
-        EndOfDayDialog.Instance.Show();
+        EndOfDayDialog.Instance.Show(new EndOfDayResult
+        {
+            CurrentLevel = CurrentLevel,
+            TotalLevels = _levels.Length,
+            AverageHappiness = _pets.Average(p => p.Happiness)
+        });
     }
 
     private void UpdatePets(double delta)
