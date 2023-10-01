@@ -21,8 +21,8 @@ public partial class Pet : RigidBody2D
     private Vector2 _movingDirection = Vector2.Zero;
 
     public const float AngerRegenRate = 0.05f;
-    public const float HappinessRegenRate = 0.005f;
-    public const float HappinessDecayRate = 0.01f;
+    public const float HappinessRegenRate = 0.01f;
+    public const float HappinessDecayRate = 0.005f;
     public const float DeathTimerMax = 40.0f;
     public const float ThinkBubbleDiff = 0.2f;
     public const float PetSpeed = 50.0f;
@@ -50,7 +50,9 @@ public partial class Pet : RigidBody2D
 
         if (result != null)
         {
-            var normal = result.GetNormal();
+            var normal = result
+                .GetNormal()
+                .Normalized();
 
             var maxRandom = 0.5f;
             var x = Mathf.Clamp(_movingDirection.X + (float)GD.RandRange(-maxRandom, maxRandom), -1.0f, 1.0f);
@@ -82,9 +84,12 @@ public partial class Pet : RigidBody2D
         _deathTimerGraphic.Visible = DeathTimer <= 10.0f;
 
         if (DeathTimer <= 0.0f)
-            DeathTimer = 1.0f;
+        {
+            DeathTimer = -1.0f;
+            return true;
+        }
 
-        return DeathTimer <= 0.0f;
+        return false;
     }
 
     public void StartDeathTimer()
@@ -95,6 +100,7 @@ public partial class Pet : RigidBody2D
 
     public void StopDeathTimer()
     {
+        _deathTimerGraphic.Visible = false;
         DeathTimer = -1.0f;
     }
 

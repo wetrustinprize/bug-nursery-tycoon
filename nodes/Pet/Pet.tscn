@@ -33,7 +33,6 @@ shape = SubResource("CapsuleShape2D_cftpj")
 [node name="ClickableArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea"]
-position = Vector2(-3.5, -13.5)
 shape = SubResource("RectangleShape2D_vlb72")
 
 [node name="DeathTimerSprite" type="Sprite2D" parent="."]

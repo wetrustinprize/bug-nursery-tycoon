@@ -185,6 +185,7 @@ public partial class Game : Node2D
 
             pet.Terrarium = terrarium;
             pet.Position = Vector2.Zero;
+            pet.StopDeathTimer();
 
             terrarium.Pets.Add(pet);
             terrarium.UpdatePetDeathTimers();

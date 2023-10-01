@@ -75,3 +75,6 @@ offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_iqa5c")
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/Quit Button" to="." method="Quit"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/Try Again Button" to="." method="Restart"]
