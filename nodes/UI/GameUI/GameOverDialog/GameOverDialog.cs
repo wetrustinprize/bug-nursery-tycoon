@@ -5,9 +5,9 @@ public partial class GameOverDialog : Control
 {
     #region Variables
 
-    [Export] private PackedScene _menuScene = null!;
     [Export] private TextureRect _petSprite = null!;
     [Export] private Label _petNameLabel = null!;
+    [Export] private AudioStreamPlayer _clickSound = null!;
 
     private bool _isVisible = false;
 
@@ -39,15 +39,19 @@ public partial class GameOverDialog : Control
 
     public void Restart()
     {
+        _clickSound.Play();
         Hide();
         Game.Instance.RestartGame();
     }
 
     public void MainMenu()
     {
-        var menu = _menuScene.Instantiate();
-        GetTree().Root.AddChild(menu);
-        QueueFree();
+        _clickSound.Play();
+        foreach (var node in GetTree().GetNodesInGroup("Game"))
+            node.QueueFree();
+
+        GetTree().ReloadCurrentScene();
+        GetParent().QueueFree();
     }
 
     public void Show(Pet diedPet)

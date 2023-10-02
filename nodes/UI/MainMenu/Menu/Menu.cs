@@ -5,6 +5,7 @@ public partial class Menu : Control
 {
     #region Variables
 
+    [Export] private AudioStreamPlayer _clickSound = null!;
     [Export] private PackedScene _gameScene = null!;
     [Export] private Control _credits = null!;
     [Export] private Control _help = null!;
@@ -28,26 +29,31 @@ public partial class Menu : Control
 
     public void OpenHelp()
     {
+        _clickSound.Play();
         _help.Visible = true;
     }
 
     public void OpenCredits()
     {
+        _clickSound.Play();
         _credits.Visible = true;
     }
 
     public void CloseCredits()
     {
+        _clickSound.Play();
         _credits.Visible = false;
     }
 
     public void CloseHelp()
     {
+        _clickSound.Play();
         _help.Visible = false;
     }
 
     public void ExitGame()
     {
+        _clickSound.Play();
         GetTree().Quit();
     }
 

@@ -1,17 +1,17 @@
 [gd_scene load_steps=7 format=3 uid="uid://dqhy147sctgww"]
 
 [ext_resource type="Script" path="res://nodes/PetBox/PetBox.cs" id="1_g8ceu"]
-[ext_resource type="Texture2D" uid="uid://5ybdf08xrp1y" path="res://graphics/prototype/box_outer.png" id="1_s5a7b"]
-[ext_resource type="Texture2D" uid="uid://catjfp420qvc5" path="res://graphics/prototype/box_inner.png" id="2_wx6op"]
+[ext_resource type="Texture2D" uid="uid://dqgmb886rvhrh" path="res://graphics/petbox_backdrop.png" id="2_ajjnj"]
+[ext_resource type="Texture2D" uid="uid://d2b0sy7x2h3q8" path="res://graphics/petbox_face.png" id="3_qfpf3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vvm7q"]
-size = Vector2(1261, 528)
+size = Vector2(1970, 1097)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kum28"]
-size = Vector2(1125, 34)
+size = Vector2(1665.5, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0gb80"]
-size = Vector2(32, 515.886)
+size = Vector2(35.7891, 784.031)
 
 [node name="PetBox" type="Node2D" node_paths=PackedStringArray("_boxInnerSprite")]
 y_sort_enabled = true
@@ -20,16 +20,16 @@ _boxInnerSprite = NodePath("BoxInner")
 
 [node name="BoxOuter" type="Sprite2D" parent="."]
 z_index = -1
-texture = ExtResource("1_s5a7b")
+texture = ExtResource("2_ajjnj")
 
 [node name="BoxInner" type="Sprite2D" parent="."]
 z_index = 1
-texture = ExtResource("2_wx6op")
+texture = ExtResource("3_qfpf3")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(22.5, -92)
+position = Vector2(82, 83.5)
 shape = SubResource("RectangleShape2D_vvm7q")
 
 [node name="PetBoundaries" type="StaticBody2D" parent="."]
@@ -37,21 +37,21 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="Bottom" type="CollisionShape2D" parent="PetBoundaries"]
-position = Vector2(-54.5, 163)
+position = Vector2(-42.75, 590)
 shape = SubResource("RectangleShape2D_kum28")
 
 [node name="Left" type="CollisionShape2D" parent="PetBoundaries"]
-position = Vector2(-516, -96)
-rotation = 0.314159
+position = Vector2(-633, 294.5)
+rotation = 0.678159
 shape = SubResource("RectangleShape2D_0gb80")
 
 [node name="Right" type="CollisionShape2D" parent="PetBoundaries"]
-position = Vector2(585, -86)
-rotation = 0.314159
+position = Vector2(905.629, 307.887)
+rotation = 0.371229
 shape = SubResource("RectangleShape2D_0gb80")
 
 [node name="Top" type="CollisionShape2D" parent="PetBoundaries"]
-position = Vector2(132, -343)
+position = Vector2(217, -9)
 shape = SubResource("RectangleShape2D_kum28")
 
 [connection signal="input_event" from="Area2D" to="." method="Area2DInputEvent"]

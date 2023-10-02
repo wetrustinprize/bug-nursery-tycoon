@@ -9,13 +9,15 @@ public partial class Terrarium : Node2D
     #region Variables
 
     [Export] private Node2D _petsNode = null!;
-    [Export] private AnimationPlayer _animationPlayer = null!;
+    [Export] private AnimationPlayer _terrariumAnimationPlayer = null!;
+    [Export] private AnimationPlayer _temperatureAnimationPlayer = null!;
     [Export] public Node2D FocusPoint = null!;
 
     [ExportGroup("Sprites")] [Export] private Sprite2D _backgroundSprite = null!;
     [Export] private Sprite2D _objectsSprite = null!;
     [Export] private Sprite2D _groundSprite = null!;
     [Export] private Sprite2D _newGroundSprite = null!;
+    [Export] private Sprite2D _temperatureSprite = null!;
 
     [ExportGroup("Textures")] [ExportSubgroup("Desert")] [Export]
     private Texture2D _desertBackgroundTexture = null!;
@@ -31,10 +33,18 @@ public partial class Terrarium : Node2D
     [Export] private Texture2D _swampObjectsTexture = null!;
     [Export] private Texture2D _swampGroundTexture = null!;
 
+    [ExportSubgroup("Temperature")] [Export]
+    private Texture2D _coldTemperatureTexture = null!;
+
+    [Export] private Texture2D _hotTemperatureTexture = null!;
+    [Export] private Texture2D _normalTemperatureTexture = null!;
+
     public bool IsSelected => Game.Instance.SelectedFocus == this;
+    public bool CanChangeBiome => !_terrariumAnimationPlayer.IsPlaying();
+    public bool CanChangeTemperature => !_temperatureAnimationPlayer.IsPlaying();
 
     private PetBiome _biome = PetBiome.Forest;
-    private PetTemperature _temperature = PetTemperature.Cold;
+    private PetTemperature _temperature = PetTemperature.Normal;
 
     public List<Pet> Pets = new();
 
@@ -82,7 +92,7 @@ public partial class Terrarium : Node2D
 
     #region Animation Methods
 
-    public void UpdateGround()
+    public void UpdateGroundGraphics()
     {
         _groundSprite.Texture = Biome switch
         {
@@ -93,7 +103,7 @@ public partial class Terrarium : Node2D
         };
     }
 
-    public void UpdateObjects()
+    public void UpdateObjectsGraphics()
     {
         _objectsSprite.Texture = Biome switch
         {
@@ -104,7 +114,7 @@ public partial class Terrarium : Node2D
         };
     }
 
-    public void UpdateBackground()
+    public void UpdateBackgroundGraphics()
     {
         _backgroundSprite.Texture = Biome switch
         {
@@ -115,24 +125,28 @@ public partial class Terrarium : Node2D
         };
     }
 
+    public void UpdateTemperatureGraphics()
+    {
+        _temperatureSprite.Texture = Temperature switch
+        {
+            PetTemperature.Cold => _coldTemperatureTexture,
+            PetTemperature.Normal => _normalTemperatureTexture,
+            PetTemperature.Hot => _hotTemperatureTexture,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+    }
+
     #endregion
 
     #region Callbacks
 
-    public void UpdateBiome(int biome)
+    public void UpdateBiome(PetBiome biome)
     {
-        var newBiome = biome switch
-        {
-            0 => PetBiome.Forest,
-            1 => PetBiome.Desert,
-            2 => PetBiome.Swamp,
-            _ => throw new ArgumentOutOfRangeException(nameof(biome), biome, null)
-        };
+        if (!CanChangeBiome) return;
+        if (biome == Biome) return;
+        Biome = biome;
 
-        if (newBiome == Biome) return;
-        Biome = newBiome;
-
-        _newGroundSprite.Texture = newBiome switch
+        _newGroundSprite.Texture = biome switch
         {
             PetBiome.Desert => _desertGroundTexture,
             PetBiome.Forest => _forestGroundTexture,
@@ -140,18 +154,16 @@ public partial class Terrarium : Node2D
             _ => throw new ArgumentOutOfRangeException()
         };
 
-        _animationPlayer.Play("Switch");
+        _terrariumAnimationPlayer.Play("Switch");
     }
 
-    public void UpdateTemperature(int temperature)
+    public void UpdateTemperature(PetTemperature temperature)
     {
-        Temperature = temperature switch
-        {
-            0 => PetTemperature.Cold,
-            1 => PetTemperature.Normal,
-            2 => PetTemperature.Hot,
-            _ => throw new ArgumentOutOfRangeException(nameof(temperature), temperature, null)
-        };
+        if (!CanChangeTemperature) return;
+        if (temperature == Temperature) return;
+        Temperature = temperature;
+
+        _temperatureAnimationPlayer.Play("Switch");
     }
 
     public void Area2DInputEvent(Node viewport, InputEvent @event, int shapeIdx)

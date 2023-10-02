@@ -1,35 +1,54 @@
-[gd_scene load_steps=8 format=3 uid="uid://bd1pb0gsmllrp"]
+[gd_scene load_steps=8 format=3 uid="uid://tq4ie30jt5ph"]
 
 [ext_resource type="Script" path="res://nodes/UI/GameUI/GameUI.cs" id="1_qqw1b"]
-[ext_resource type="PackedScene" uid="uid://bghhccj8d5nu3" path="res://nodes/UI/GameUI/Timer/Timer.tscn" id="2_k6upf"]
 [ext_resource type="PackedScene" uid="uid://gb2j8jm68lre" path="res://nodes/UI/GameUI/EndOfDayDialog/EndOfDayDialog.tscn" id="3_06d8c"]
 [ext_resource type="PackedScene" uid="uid://bteqqt70m3aot" path="res://nodes/UI/GameUI/GameOverDialog/GameOverDialog.tscn" id="4_h3sht"]
 [ext_resource type="PackedScene" uid="uid://cswvdw1geqicb" path="res://nodes/UI/GameUI/PetInformation/PetInformation.tscn" id="5_vjuf5"]
 [ext_resource type="Theme" uid="uid://pr2r0skc7csa" path="res://nodes/UI/Theme/Theme.tres" id="6_5nlin"]
+[ext_resource type="PackedScene" uid="uid://co5vdlql75u7q" path="res://nodes/UI/GameUI/TerrariumInformation/TerrariumInformation.tscn" id="7_ekkck"]
 [ext_resource type="Texture2D" uid="uid://bo1xv6ubxbrnc" path="res://graphics/box_icon.png" id="7_t6php"]
 
-[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("_creatureInBox")]
+[node name="GameUI" type="Control" node_paths=PackedStringArray("_creatureInBox")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("6_5nlin")
 script = ExtResource("1_qqw1b")
-_creatureInBox = NodePath("CreaturesInBoxButton")
-
-[node name="Timer" parent="." instance=ExtResource("2_k6upf")]
-mouse_filter = 2
-
-[node name="EndOfDayDialog" parent="." instance=ExtResource("3_06d8c")]
-
-[node name="GameOverDialog" parent="." instance=ExtResource("4_h3sht")]
+_creatureInBox = NodePath("Control/BoxButton")
 
 [node name="PetInformation" parent="." instance=ExtResource("5_vjuf5")]
+layout_mode = 1
+
+[node name="GameOverDialog" parent="." instance=ExtResource("4_h3sht")]
+layout_mode = 1
+
+[node name="EndOfDayDialog" parent="." instance=ExtResource("3_06d8c")]
+layout_mode = 1
+
+[node name="TerrariumInformation" parent="." node_paths=PackedStringArray("_biomeButtons", "_temperatureButtons") instance=ExtResource("7_ekkck")]
+layout_mode = 1
+mouse_filter = 1
+_biomeButtons = []
+_temperatureButtons = []
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 mouse_filter = 1
 
-[node name="CreaturesInBoxButton" type="Button" parent="."]
+[node name="BoxButton" type="Button" parent="Control"]
+layout_mode = 0
 offset_left = 14.0
-offset_top = 14.0
+offset_top = 10.0
 offset_right = 181.0
-offset_bottom = 61.0
-theme = ExtResource("6_5nlin")
+offset_bottom = 57.0
+mouse_filter = 1
 text = "Creatures in box!"
 icon = ExtResource("7_t6php")
-alignment = 0
 
-[connection signal="pressed" from="CreaturesInBoxButton" to="." method="GoToBox"]
+[connection signal="pressed" from="Control/BoxButton" to="." method="GoToBox"]

@@ -8,4 +8,4 @@
 
 [resource]
 script = ExtResource("1_1oe8l")
-PetsInLevel = Array[Object]([ExtResource("1_0m1j0"), ExtResource("2_hphqs"), ExtResource("3_afofy"), ExtResource("4_3ye8r")])
+PetsInLevel = Array[Object]([ExtResource("1_0m1j0"), ExtResource("2_hphqs"), ExtResource("3_afofy"), ExtResource("4_3ye8r"), ExtResource("3_afofy"), ExtResource("3_afofy"), ExtResource("4_3ye8r")])

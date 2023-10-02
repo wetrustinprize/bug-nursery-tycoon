@@ -14,7 +14,7 @@ public partial class EndOfDayDialog : Control
 
     [Export] private Label _dayLabel = null!;
     [Export] private Label _avgLabel = null!;
-    [Export] private PackedScene _menuScene = null!;
+    [Export] private AudioStreamPlayer _clickSound = null!;
 
     private bool _isVisible = false;
 
@@ -28,7 +28,7 @@ public partial class EndOfDayDialog : Control
         Instance = this;
         Modulate = new Color(1, 1, 1, 0);
         Visible = false;
-        Hide();
+        HideDialog();
     }
 
     public override void _Process(double delta)
@@ -52,7 +52,7 @@ public partial class EndOfDayDialog : Control
         _avgLabel.Text = result.AverageHappiness.ToString("P1");
     }
 
-    public void Hide()
+    public void HideDialog()
     {
         _isVisible = false;
         MouseFilter = MouseFilterEnum.Ignore;
@@ -60,14 +60,18 @@ public partial class EndOfDayDialog : Control
 
     public void NextDay()
     {
-        Hide();
+        _clickSound.Play();
+        HideDialog();
         Game.Instance.NextLevel();
     }
 
     public void MainMenu()
     {
-        var menu = _menuScene.Instantiate();
-        GetTree().Root.AddChild(menu);
-        QueueFree();
+        _clickSound.Play();
+        foreach (var node in GetTree().GetNodesInGroup("Game"))
+            node.QueueFree();
+
+        GetTree().ReloadCurrentScene();
+        GetParent().QueueFree();
     }
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvogmp4dfksut"
-path="res://.godot/imported/terrain_swamp_background.png-82c50c235672cb6eb877cd96749bca4c.ctex"
+uid="uid://dqgmb886rvhrh"
+path="res://.godot/imported/petbox_backdrop.png-c0557d705b5f98d15841c9135f38500a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/terrarium/terrain_swamp_background.png"
-dest_files=["res://.godot/imported/terrain_swamp_background.png-82c50c235672cb6eb877cd96749bca4c.ctex"]
+source_file="res://graphics/petbox_backdrop.png"
+dest_files=["res://.godot/imported/petbox_backdrop.png-c0557d705b5f98d15841c9135f38500a.ctex"]
 
 [params]
 

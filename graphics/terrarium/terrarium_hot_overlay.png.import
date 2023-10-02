@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2uf1nfxgdpod"
-path="res://.godot/imported/terrain_swamp_objects.png-7484133f016ff96f2f8624e36156ccbe.ctex"
+uid="uid://dll671st1vhhw"
+path="res://.godot/imported/terrarium_hot_overlay.png-85a1bf2441c0c3ee7b93ea429f358abd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/terrarium/terrain_swamp_objects.png"
-dest_files=["res://.godot/imported/terrain_swamp_objects.png-7484133f016ff96f2f8624e36156ccbe.ctex"]
+source_file="res://graphics/terrarium/terrarium_hot_overlay.png"
+dest_files=["res://.godot/imported/terrarium_hot_overlay.png-85a1bf2441c0c3ee7b93ea429f358abd.ctex"]
 
 [params]
 

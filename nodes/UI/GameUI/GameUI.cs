@@ -1,7 +1,8 @@
 using Godot;
 using System;
 
-public partial class GameUI : CanvasLayer
+[GlobalClass]
+public partial class GameUI : Control
 {
     [Export] private Button _creatureInBox = null!;
 

@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://k5sybuuelxse"]
+
+[ext_resource type="StyleBox" uid="uid://bqlbb056o681n" path="res://nodes/UI/Theme/ButtonMachine/ButtonMachineDisabledStyleBox.tres" id="1_f82lh"]
+[ext_resource type="StyleBox" uid="uid://b8isj4dbq0qpy" path="res://nodes/UI/Theme/ButtonMachine/ButtonMachineHoverStyleBox.tres" id="2_4dc3v"]
+[ext_resource type="StyleBox" uid="uid://ceqgcnwwcsen8" path="res://nodes/UI/Theme/ButtonMachine/ButtonMachineNormalStyleBox.tres" id="3_im74e"]
+[ext_resource type="StyleBox" uid="uid://qsgrwtd08iyg" path="res://nodes/UI/Theme/ButtonMachine/ButtonMachinePressedStyleBox.tres" id="4_fngdc"]
+[ext_resource type="StyleBox" uid="uid://bsukjwp1owv78" path="res://nodes/UI/Theme/PanelMachineStyleBox.tres" id="5_joyyw"]
+
+[resource]
+Button/styles/disabled = ExtResource("1_f82lh")
+Button/styles/hover = ExtResource("2_4dc3v")
+Button/styles/normal = ExtResource("3_im74e")
+Button/styles/pressed = ExtResource("4_fngdc")
+Panel/styles/panel = ExtResource("5_joyyw")
+PanelContainer/styles/panel = ExtResource("5_joyyw")

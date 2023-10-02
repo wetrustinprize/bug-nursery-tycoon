@@ -1,0 +1,120 @@
+[gd_scene load_steps=11 format=3 uid="uid://co5vdlql75u7q"]
+
+[ext_resource type="Theme" uid="uid://k5sybuuelxse" path="res://nodes/UI/Theme/MachineTheme.tres" id="1_cd0pw"]
+[ext_resource type="Texture2D" uid="uid://buek7lenieu0p" path="res://graphics/biomes/forest.png" id="2_318cg"]
+[ext_resource type="Script" path="res://nodes/UI/GameUI/TerrariumInformation/TerrariumInformation.cs" id="2_sql44"]
+[ext_resource type="Texture2D" uid="uid://dg2f1kix15mmp" path="res://graphics/biomes/desert.png" id="3_5j63y"]
+[ext_resource type="Texture2D" uid="uid://bln0gx4uisyn3" path="res://graphics/biomes/swamp.png" id="4_2imor"]
+[ext_resource type="Texture2D" uid="uid://0opcv1vuvrnf" path="res://graphics/weather/weather_cold.png" id="5_7s11x"]
+[ext_resource type="Texture2D" uid="uid://dhsoy4t1i7rln" path="res://graphics/weather/weather_neutral.png" id="6_bjcqk"]
+[ext_resource type="Texture2D" uid="uid://ckt4ofnro0x66" path="res://graphics/weather/weather_hot.png" id="7_lnhwj"]
+[ext_resource type="AudioStream" uid="uid://cbfv6ob8xrt6f" path="res://sounds/click.mp3" id="9_6jqpm"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a6c8n"]
+light_mode = 1
+
+[node name="TerrariumInformation" type="Control" node_paths=PackedStringArray("_clickSound", "_biomeButtons", "_temperatureButtons", "_biomeTimer", "_temperatureTimer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cd0pw")
+script = ExtResource("2_sql44")
+_clickSound = NodePath("ClickSound")
+_biomeButtons = [NodePath("PanelContainer/HBoxContainer/HBoxContainer/Forest"), NodePath("PanelContainer/HBoxContainer/HBoxContainer/Desert"), NodePath("PanelContainer/HBoxContainer/HBoxContainer/Swamp")]
+_temperatureButtons = [NodePath("PanelContainer/HBoxContainer/HBoxContainer2/Cold"), NodePath("PanelContainer/HBoxContainer/HBoxContainer2/Normal"), NodePath("PanelContainer/HBoxContainer/HBoxContainer2/Hot")]
+_biomeTimer = NodePath("BiomeTimer")
+_temperatureTimer = NodePath("TemperatureTimer")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -302.0
+offset_top = -124.0
+offset_right = 302.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Forest" type="Button" parent="PanelContainer/HBoxContainer/HBoxContainer"]
+material = SubResource("CanvasItemMaterial_a6c8n")
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+icon = ExtResource("2_318cg")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Desert" type="Button" parent="PanelContainer/HBoxContainer/HBoxContainer"]
+material = SubResource("CanvasItemMaterial_a6c8n")
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+icon = ExtResource("3_5j63y")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Swamp" type="Button" parent="PanelContainer/HBoxContainer/HBoxContainer"]
+material = SubResource("CanvasItemMaterial_a6c8n")
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+icon = ExtResource("4_2imor")
+icon_alignment = 1
+expand_icon = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Cold" type="Button" parent="PanelContainer/HBoxContainer/HBoxContainer2"]
+material = SubResource("CanvasItemMaterial_a6c8n")
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+icon = ExtResource("5_7s11x")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Normal" type="Button" parent="PanelContainer/HBoxContainer/HBoxContainer2"]
+material = SubResource("CanvasItemMaterial_a6c8n")
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+icon = ExtResource("6_bjcqk")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Hot" type="Button" parent="PanelContainer/HBoxContainer/HBoxContainer2"]
+material = SubResource("CanvasItemMaterial_a6c8n")
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+icon = ExtResource("7_lnhwj")
+icon_alignment = 1
+expand_icon = true
+
+[node name="BiomeTimer" type="Timer" parent="."]
+
+[node name="TemperatureTimer" type="Timer" parent="."]
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_6jqpm")
+
+[connection signal="pressed" from="PanelContainer/HBoxContainer/HBoxContainer/Forest" to="." method="UpdateBiome" binds= [0]]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/HBoxContainer/Desert" to="." method="UpdateBiome" binds= [1]]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/HBoxContainer/Swamp" to="." method="UpdateBiome" binds= [2]]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/HBoxContainer2/Cold" to="." method="UpdateTemperature" binds= [0]]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/HBoxContainer2/Normal" to="." method="UpdateTemperature" binds= [1]]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/HBoxContainer2/Hot" to="." method="UpdateTemperature" binds= [2]]
+[connection signal="timeout" from="BiomeTimer" to="." method="BiomeTimeout"]
+[connection signal="timeout" from="TemperatureTimer" to="." method="TemperatureTimeout"]

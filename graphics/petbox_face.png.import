@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vtr5ml082x0m"
-path="res://.godot/imported/terrain_swamp_floor.png-cb73b6c5f161d1b0e06dd59c6f18d21e.ctex"
+uid="uid://d2b0sy7x2h3q8"
+path="res://.godot/imported/petbox_face.png-035b272549049a9092409eb109b7a243.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/terrarium/terrain_swamp_floor.png"
-dest_files=["res://.godot/imported/terrain_swamp_floor.png-cb73b6c5f161d1b0e06dd59c6f18d21e.ctex"]
+source_file="res://graphics/petbox_face.png"
+dest_files=["res://.godot/imported/petbox_face.png-035b272549049a9092409eb109b7a243.ctex"]
 
 [params]
 

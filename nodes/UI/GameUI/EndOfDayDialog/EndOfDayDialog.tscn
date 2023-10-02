@@ -3,8 +3,8 @@
 [ext_resource type="Theme" uid="uid://pr2r0skc7csa" path="res://nodes/UI/Theme/Theme.tres" id="1_4dsv6"]
 [ext_resource type="Script" path="res://nodes/UI/GameUI/EndOfDayDialog/EndOfDayDialog.cs" id="1_dyqim"]
 [ext_resource type="FontFile" uid="uid://petwfvpacvbx" path="res://graphics/style/Fredoka-Bold.ttf" id="3_j01jf"]
-[ext_resource type="PackedScene" uid="uid://h38ntqbmv6ke" path="res://nodes/UI/MainMenu/MainMenu.tscn" id="3_jroq0"]
 [ext_resource type="Texture2D" uid="uid://dxuuocordplw0" path="res://graphics/sociabilty/happy.png" id="4_y5nl8"]
+[ext_resource type="AudioStream" uid="uid://cbfv6ob8xrt6f" path="res://sounds/click.mp3" id="5_fxd8v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2q3u6"]
 font = ExtResource("3_j01jf")
@@ -12,7 +12,7 @@ font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_7e3cr"]
 
-[node name="EndOfDayDialog" type="Control" node_paths=PackedStringArray("_dayLabel", "_avgLabel")]
+[node name="EndOfDayDialog" type="Control" node_paths=PackedStringArray("_dayLabel", "_avgLabel", "_clickSound")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,7 @@ theme = ExtResource("1_4dsv6")
 script = ExtResource("1_dyqim")
 _dayLabel = NodePath("PanelContainer/VBoxContainer/Day")
 _avgLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/Average")
-_menuScene = ExtResource("3_jroq0")
+_clickSound = NodePath("ClickSound")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -91,6 +91,9 @@ text = "Main Menu"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Next Day"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fxd8v")
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Main Menu Button" to="." method="MainMenu"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Next Day Button" to="." method="NextDay"]

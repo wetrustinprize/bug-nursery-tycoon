@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cswvdw1geqicb"]
+[gd_scene load_steps=23 format=3 uid="uid://cswvdw1geqicb"]
 
 [ext_resource type="Script" path="res://nodes/UI/GameUI/PetInformation/PetInformation.cs" id="1_0771g"]
 [ext_resource type="Theme" uid="uid://pr2r0skc7csa" path="res://nodes/UI/Theme/Theme.tres" id="1_d8j4v"]
@@ -19,13 +19,14 @@
 [ext_resource type="StyleBox" uid="uid://blulxmlivilon" path="res://nodes/UI/Theme/ProgressFillStyleBox_Angry.tres" id="17_wijxm"]
 [ext_resource type="FontFile" uid="uid://petwfvpacvbx" path="res://graphics/style/Fredoka-Bold.ttf" id="18_7a6pa"]
 [ext_resource type="Texture2D" uid="uid://baknd7n4vw65f" path="res://graphics/death.png" id="18_vc30j"]
+[ext_resource type="AudioStream" uid="uid://cbfv6ob8xrt6f" path="res://sounds/click.mp3" id="20_56h4q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p8vie"]
 font = ExtResource("18_7a6pa")
 
 [sub_resource type="LabelSettings" id="LabelSettings_spy7c"]
 
-[node name="PetInformation" type="Control" node_paths=PackedStringArray("_nameLabel", "_petGraphic", "_biomeGraphic", "_temperatureGraphic", "_foodGraphic", "_happinessDecayLabel", "_happinessProgressBar", "_angerProgressBar", "_deathProgressBar", "_personalityContainer")]
+[node name="PetInformation" type="Control" node_paths=PackedStringArray("_clickSound", "_nameLabel", "_petGraphic", "_biomeGraphic", "_temperatureGraphic", "_foodGraphic", "_happinessDecayLabel", "_happinessProgressBar", "_angerProgressBar", "_deathProgressBar", "_personalityContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,6 +36,7 @@ grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("1_d8j4v")
 script = ExtResource("1_0771g")
+_clickSound = NodePath("ClickSound")
 _nameLabel = NodePath("PanelContainer/VBoxContainer/Header/Information/Pet Name")
 _petGraphic = NodePath("PanelContainer/VBoxContainer/Header/PetGraphic")
 _biomeGraphic = NodePath("PanelContainer/VBoxContainer/Header/Information/DiamondsContainer/BiomeDiamond")
@@ -226,13 +228,8 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("18_7a6pa")
 text = "2"
 
-[node name="Terra3" type="Button" parent="PanelContainer/VBoxContainer/MoveTo/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(32, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("18_7a6pa")
-text = "3"
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_56h4q")
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MoveTo/HBoxContainer/Terra1" to="." method="MoveTo" binds= [0]]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MoveTo/HBoxContainer/Terra2" to="." method="MoveTo" binds= [1]]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MoveTo/HBoxContainer/Terra3" to="." method="MoveTo" binds= [2]]

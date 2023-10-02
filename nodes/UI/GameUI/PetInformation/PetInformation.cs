@@ -5,6 +5,8 @@ public partial class PetInformation : Control
 {
     #region Variables
 
+    [Export] private AudioStreamPlayer _clickSound = null!;
+
     [ExportGroup("Header")] [Export] private Label _nameLabel = null!;
     [Export] private TextureRect _petGraphic = null!;
     [Export] private TextureRect _biomeGraphic = null!;
@@ -127,6 +129,7 @@ public partial class PetInformation : Control
     public void MoveTo(int terrarium)
     {
         if (_pet == null) return;
+        _clickSound.Play();
 
         Game.Instance.MovePet(_pet, terrarium);
     }

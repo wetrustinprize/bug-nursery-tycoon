@@ -10,9 +10,9 @@
 [ext_resource type="Resource" uid="uid://du74p0olbt5ph" path="res://levels/level4.tres" id="5_3cjyq"]
 [ext_resource type="Resource" uid="uid://dqa3qbmpv5rjb" path="res://levels/level5.tres" id="6_65ldy"]
 [ext_resource type="PackedScene" uid="uid://dqhy147sctgww" path="res://nodes/PetBox/PetBox.tscn" id="8_7qk15"]
-[ext_resource type="PackedScene" uid="uid://bd1pb0gsmllrp" path="res://nodes/UI/GameUI/GameUI.tscn" id="8_fv3yk"]
+[ext_resource type="PackedScene" uid="uid://tq4ie30jt5ph" path="res://nodes/UI/GameUI/GameUI.tscn" id="8_fv3yk"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("Terrariums", "_petBox")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("Terrariums", "_petBox") groups=["Game"]]
 script = ExtResource("1_ivwcj")
 _levels = Array[Object]([ExtResource("2_oylsc"), ExtResource("3_ffvjr"), ExtResource("4_eoicw"), ExtResource("5_3cjyq"), ExtResource("6_65ldy")])
 Terrariums = [NodePath("Terrarium"), NodePath("Terrarium2")]
@@ -30,4 +30,6 @@ position = Vector2(-1447, 49)
 [node name="PetBox" parent="." instance=ExtResource("8_7qk15")]
 position = Vector2(-108, 1227)
 
-[node name="GameUI" parent="." instance=ExtResource("8_fv3yk")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameUI" parent="CanvasLayer" instance=ExtResource("8_fv3yk")]

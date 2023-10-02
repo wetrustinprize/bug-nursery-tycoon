@@ -183,6 +183,7 @@ public partial class Game : Node2D
             terrarium.Pets.Clear();
 
         _pets.ForEach(p => p.QueueFree());
+        _pets.Clear();
     }
 
     public void CreatePet(PetType pet, int terrariumIndex = -1)
@@ -279,10 +280,17 @@ public partial class Game : Node2D
         if (resetHud)
             PetInformation.Instance.HidePet();
 
+
         if (terrarium == null)
+        {
             Player.Instance.Unfocus();
+            TerrariumInformation.Instance.HideTerrarium();
+        }
         else
+        {
             Player.Instance.FocusAt(terrarium.FocusPoint.GlobalPosition);
+            TerrariumInformation.Instance.ShowTerrarium(terrarium);
+        }
     }
 
     #endregion

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://vtk4gkn10gm8"]
+[gd_scene load_steps=12 format=3 uid="uid://vtk4gkn10gm8"]
 
 [ext_resource type="Theme" uid="uid://pr2r0skc7csa" path="res://nodes/UI/Theme/Theme.tres" id="1_gr0pj"]
 [ext_resource type="FontFile" uid="uid://petwfvpacvbx" path="res://graphics/style/Fredoka-Bold.ttf" id="2_glio1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c1vlrlocqj81c" path="res://graphics/sociabilty/puto.png" id="5_ug3k2"]
 [ext_resource type="Texture2D" uid="uid://bpxfuhyvreeel" path="res://graphics/sociabilty/sociable.png" id="6_h5bxw"]
 [ext_resource type="Texture2D" uid="uid://ckm2r3dgtc1a2" path="res://graphics/sociabilty/shy.png" id="7_mc1vu"]
+[ext_resource type="AudioStream" uid="uid://cbfv6ob8xrt6f" path="res://sounds/click.mp3" id="8_lvgo0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wb78c"]
 font = ExtResource("2_glio1")
@@ -20,7 +21,7 @@ font_size = 32
 font = ExtResource("2_glio1")
 font_size = 32
 
-[node name="Menu" type="Control" node_paths=PackedStringArray("_credits", "_help")]
+[node name="Menu" type="Control" node_paths=PackedStringArray("_clickSound", "_credits", "_help")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,6 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_gr0pj")
 script = ExtResource("2_ja24n")
+_clickSound = NodePath("ClickSound")
 _gameScene = ExtResource("3_4q3h4")
 _credits = NodePath("Credits")
 _help = NodePath("Help")
@@ -247,6 +249,9 @@ text = "[b]Victor Velozo[/b]: Music, art
 [b]KGeib[/b]: Game Design, Testing
 [b]Jack[/b]: Art"
 fit_content = true
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_lvgo0")
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/StartGameButton" to="." method="StartGame"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HelpButton" to="." method="OpenHelp"]
