@@ -12,6 +12,7 @@ public partial class Terrarium : Node2D
     [Export] private AnimationPlayer _terrariumAnimationPlayer = null!;
     [Export] private AnimationPlayer _temperatureAnimationPlayer = null!;
     [Export] public Node2D FocusPoint = null!;
+    [Export] private AudioStreamPlayer _temperatureAudioPlayer = null!;
 
     [ExportGroup("Sprites")] [Export] private Sprite2D _backgroundSprite = null!;
     [Export] private Sprite2D _objectsSprite = null!;
@@ -38,6 +39,12 @@ public partial class Terrarium : Node2D
 
     [Export] private Texture2D _hotTemperatureTexture = null!;
     [Export] private Texture2D _normalTemperatureTexture = null!;
+
+    [ExportGroup("Sounds")] [ExportSubgroup("Temperature")] [Export]
+    private AudioStream _coldTemperatureSound = null!;
+
+    [Export] private AudioStream _hotTemperatureSound = null!;
+    [Export] private AudioStream _normalTemperatureSound = null!;
 
     public bool IsSelected => Game.Instance.SelectedFocus == this;
     public bool CanChangeBiome => !_terrariumAnimationPlayer.IsPlaying();
@@ -134,6 +141,15 @@ public partial class Terrarium : Node2D
             PetTemperature.Hot => _hotTemperatureTexture,
             _ => throw new ArgumentOutOfRangeException()
         };
+
+        _temperatureAudioPlayer.Stream = Temperature switch
+        {
+            PetTemperature.Cold => _coldTemperatureSound,
+            PetTemperature.Normal => _normalTemperatureSound,
+            PetTemperature.Hot => _hotTemperatureSound,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        _temperatureAudioPlayer.Play();
     }
 
     #endregion

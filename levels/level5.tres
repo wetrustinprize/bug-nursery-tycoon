@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://bb8msjusq3p2u" path="res://pets/jacol.tres" id="2_l3tfm"]
 [ext_resource type="Resource" uid="uid://s7m7pjbmn8ps" path="res://pets/triadi.tres" id="3_nav2a"]
 [ext_resource type="Resource" uid="uid://dde0dfnwjkdkv" path="res://pets/cervao.tres" id="4_dxo21"]
-[ext_resource type="Resource" uid="uid://bc3h8b108oiya" path="res://pets/bolonga.tres" id="5_u2nd3"]
+[ext_resource type="Resource" uid="uid://bc3h8b108oiya" path="res://pets/bolongo.tres" id="5_u2nd3"]
 
 [resource]
 script = ExtResource("1_jqjwx")

@@ -13,10 +13,9 @@ size = Vector2(1665.5, 34)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0gb80"]
 size = Vector2(35.7891, 784.031)
 
-[node name="PetBox" type="Node2D" node_paths=PackedStringArray("_boxInnerSprite")]
+[node name="PetBox" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_g8ceu")
-_boxInnerSprite = NodePath("BoxInner")
 
 [node name="BoxOuter" type="Sprite2D" parent="."]
 z_index = -1

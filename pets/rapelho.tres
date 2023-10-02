@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="PetType" load_steps=3 format=3 uid="uid://cp3gpqngs1cte"]
 
+[ext_resource type="Texture2D" uid="uid://58uox16sae3c" path="res://graphics/creatures/rapelho.png" id="1_3ljtl"]
 [ext_resource type="Script" path="res://nodes/Pet/PetType.cs" id="1_gtgao"]
-[ext_resource type="Texture2D" uid="uid://ble52d1q360mo" path="res://graphics/prototype/coeloposo.png" id="1_tly51"]
 
 [resource]
 script = ExtResource("1_gtgao")
@@ -10,4 +10,4 @@ FoodType = 0
 Biome = 0
 Temperature = 1
 Personality = 8
-Graphic = ExtResource("1_tly51")
+Graphic = ExtResource("1_3ljtl")

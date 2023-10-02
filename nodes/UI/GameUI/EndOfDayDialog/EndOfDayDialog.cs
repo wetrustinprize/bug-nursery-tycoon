@@ -15,6 +15,7 @@ public partial class EndOfDayDialog : Control
     [Export] private Label _dayLabel = null!;
     [Export] private Label _avgLabel = null!;
     [Export] private AudioStreamPlayer _clickSound = null!;
+    [Export] private AudioStreamPlayer _pirilimSound = null!;
 
     private bool _isVisible = false;
 
@@ -45,6 +46,7 @@ public partial class EndOfDayDialog : Control
 
     public void Show(EndOfDayResult result)
     {
+        _pirilimSound.Play();
         _isVisible = true;
         MouseFilter = MouseFilterEnum.Stop;
 

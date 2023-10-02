@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PetType" load_steps=3 format=3 uid="uid://bc3h8b108oiya"]
+
+[ext_resource type="Texture2D" uid="uid://3wfba3twqkii" path="res://graphics/creatures/bolongo.png" id="1_rms75"]
+[ext_resource type="Script" path="res://nodes/Pet/PetType.cs" id="2_4iwb4"]
+
+[resource]
+script = ExtResource("2_4iwb4")
+Name = "Bolongo"
+FoodType = 1
+Biome = 2
+Temperature = 2
+Personality = 4
+Graphic = ExtResource("1_rms75")

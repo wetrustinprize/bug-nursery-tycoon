@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0x3jkpylsuch"]
+[gd_scene load_steps=13 format=3 uid="uid://d0x3jkpylsuch"]
 
 [ext_resource type="Script" path="res://nodes/Game/Game.cs" id="1_ivwcj"]
 [ext_resource type="PackedScene" uid="uid://cdpiu0d37gls5" path="res://nodes/Terrarium/Terrarium.tscn" id="1_mcgtt"]
@@ -11,10 +11,12 @@
 [ext_resource type="Resource" uid="uid://dqa3qbmpv5rjb" path="res://levels/level5.tres" id="6_65ldy"]
 [ext_resource type="PackedScene" uid="uid://dqhy147sctgww" path="res://nodes/PetBox/PetBox.tscn" id="8_7qk15"]
 [ext_resource type="PackedScene" uid="uid://tq4ie30jt5ph" path="res://nodes/UI/GameUI/GameUI.tscn" id="8_fv3yk"]
+[ext_resource type="AudioStream" uid="uid://cy1mi821tsn36" path="res://sounds/bell-chimes.mp3" id="12_vttju"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("Terrariums", "_petBox") groups=["Game"]]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_chimesAudioPlayer", "Terrariums", "_petBox") groups=["Game"]]
 script = ExtResource("1_ivwcj")
 _levels = Array[Object]([ExtResource("2_oylsc"), ExtResource("3_ffvjr"), ExtResource("4_eoicw"), ExtResource("5_3cjyq"), ExtResource("6_65ldy")])
+_chimesAudioPlayer = NodePath("ChimeSound")
 Terrariums = [NodePath("Terrarium"), NodePath("Terrarium2")]
 _petScene = ExtResource("3_h4ehw")
 _petBox = NodePath("PetBox")
@@ -33,3 +35,6 @@ position = Vector2(-108, 1227)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GameUI" parent="CanvasLayer" instance=ExtResource("8_fv3yk")]
+
+[node name="ChimeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_vttju")

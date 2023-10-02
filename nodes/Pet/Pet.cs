@@ -9,6 +9,7 @@ public partial class Pet : RigidBody2D
     [Export] private Sprite2D _petGraphic = null!;
     [Export] private ThinkBubble _thinkBubble = null!;
     [Export] private DeathBubble _deathBubble = null!;
+    [Export] private AudioStreamPlayer _deathSound = null!;
 
     public float Happiness = 1.0f;
     public const float HappinessRegenRate = 0.01f;
@@ -142,7 +143,12 @@ public partial class Pet : RigidBody2D
 
         DeathTimer -= (float)delta;
 
-        _deathBubble.IsVisible = DeathTimer <= ShowDeathTimerAt;
+        var showDeath = DeathTimer <= ShowDeathTimerAt;
+
+        if (showDeath && !_deathSound.Playing)
+            _deathSound.Play();
+
+        _deathBubble.IsVisible = showDeath;
         _deathBubble.SetProgress(DeathTimer / ShowDeathTimerAt);
 
         var timeIsOver = DeathTimer <= 0.0f;
@@ -161,6 +167,7 @@ public partial class Pet : RigidBody2D
     public void StopDeathTimer()
     {
         _deathBubble.IsVisible = false;
+        _deathSound.Stop();
         DeathTimer = -1.0f;
     }
 

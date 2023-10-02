@@ -16,6 +16,7 @@ public partial class Game : Node2D
     #region Variables
 
     [ExportGroup("Game")] [Export] public Level[] _levels = null!;
+    [Export] private AudioStreamPlayer _chimesAudioPlayer = null!;
 
     [ExportGroup("Terrarium")] [Export] public Terrarium[] Terrariums = null!;
 
@@ -90,6 +91,7 @@ public partial class Game : Node2D
             CreatePet(pet);
 
         State = GameState.Preparing;
+        _chimesAudioPlayer.Play();
     }
 
     public void GameOver(Pet diedPet)
@@ -267,7 +269,6 @@ public partial class Game : Node2D
         SelectedFocus = _petBox;
 
         Player.Instance.FocusAt(_petBox.Position);
-        _petBox.BoxVisible = true;
     }
 
     public void FocusTerrarium(Terrarium? terrarium, bool resetHud = true)
@@ -275,7 +276,6 @@ public partial class Game : Node2D
         if (terrarium == SelectedFocus && terrarium != null) return;
 
         SelectedFocus = terrarium;
-        _petBox.BoxVisible = false;
 
         if (resetHud)
             PetInformation.Instance.HidePet();

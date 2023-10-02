@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ch3lpd3qn0unk"]
+[gd_scene load_steps=8 format=3 uid="uid://ch3lpd3qn0unk"]
 
 [ext_resource type="Script" path="res://nodes/Pet/Pet.cs" id="1_6l2m3"]
 [ext_resource type="Texture2D" uid="uid://ff2533dmhwu8" path="res://graphics/creatures/cervao.png" id="2_hsfqb"]
 [ext_resource type="PackedScene" uid="uid://cpdpod3ejx7nm" path="res://nodes/Pet/DeathBubble/DeathBubble.tscn" id="4_hmysw"]
 [ext_resource type="PackedScene" uid="uid://dfqasgrvfysje" path="res://nodes/Pet/ThinkBubble/ThinkBubble.tscn" id="4_qce63"]
+[ext_resource type="AudioStream" uid="uid://djq7v8mrr0gml" path="res://sounds/countdown-timer.ogg" id="5_bmylq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cftpj"]
 radius = 138.0
@@ -12,7 +13,7 @@ height = 276.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vlb72"]
 size = Vector2(303, 281)
 
-[node name="Pet" type="RigidBody2D" node_paths=PackedStringArray("_petGraphic", "_thinkBubble", "_deathBubble")]
+[node name="Pet" type="RigidBody2D" node_paths=PackedStringArray("_petGraphic", "_thinkBubble", "_deathBubble", "_deathSound")]
 collision_layer = 4
 collision_mask = 2
 gravity_scale = 0.0
@@ -23,6 +24,7 @@ script = ExtResource("1_6l2m3")
 _petGraphic = NodePath("PetSprite")
 _thinkBubble = NodePath("ThinkBubble")
 _deathBubble = NodePath("DeathBubble")
+_deathSound = NodePath("DeathSound")
 
 [node name="PetSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_hsfqb")
@@ -45,5 +47,8 @@ offset_left = 1.0
 offset_top = -207.0
 offset_right = 1.0
 offset_bottom = -207.0
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_bmylq")
 
 [connection signal="input_event" from="ClickableArea" to="." method="Area2DInputEvent"]

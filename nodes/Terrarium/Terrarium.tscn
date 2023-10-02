@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cdpiu0d37gls5"]
+[gd_scene load_steps=28 format=3 uid="uid://cdpiu0d37gls5"]
 
 [ext_resource type="Script" path="res://nodes/Terrarium/Terrarium.cs" id="1_nu6uy"]
 [ext_resource type="Texture2D" uid="uid://b458mop31uhyo" path="res://graphics/terrarium/terrarium_forest_background.png" id="3_rl7sk"]
@@ -9,8 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://bmju3okbfiumr" path="res://graphics/terrarium/terrarium_border.png" id="10_c42c1"]
 [ext_resource type="Texture2D" uid="uid://cadg7islhet3n" path="res://graphics/terrarium/terrarium_swamp_floor.png" id="10_d7btc"]
 [ext_resource type="Texture2D" uid="uid://bcpluvlvxymjo" path="res://graphics/terrarium/terrarium_desert_background.png" id="12_4u25q"]
+[ext_resource type="AudioStream" uid="uid://dx0lltm3libdv" path="res://sounds/freezing-sound.ogg" id="13_6o05l"]
 [ext_resource type="Texture2D" uid="uid://drpek0npcwkh8" path="res://graphics/terrarium/terrarium_border_mask.png" id="13_a8git"]
 [ext_resource type="Texture2D" uid="uid://bpes4332mqbs4" path="res://graphics/terrarium/terrarium_desert_objects.png" id="13_ahqfw"]
+[ext_resource type="AudioStream" uid="uid://c12ywx7i8eqhs" path="res://sounds/temperature/heating-sound.ogg" id="14_6l0sx"]
+[ext_resource type="AudioStream" uid="uid://dcxfcfwmves1s" path="res://sounds/temperature/neutral-sound.ogg" id="15_5chbi"]
 [ext_resource type="Texture2D" uid="uid://dicytmvoe1t2a" path="res://graphics/terrarium/terrarium_forest_floor.png.png" id="15_a3pch"]
 [ext_resource type="Texture2D" uid="uid://uwepplwq8ar3" path="res://graphics/terrarium/terrarium_cold_overlay.png" id="20_va1s8"]
 [ext_resource type="Texture2D" uid="uid://dll671st1vhhw" path="res://graphics/terrarium/terrarium_hot_overlay.png" id="20_yqf06"]
@@ -26,6 +29,9 @@ light_mode = 2
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iod4j"]
 light_mode = 2
+
+[sub_resource type="Animation" id="Animation_cqm8t"]
+length = 0.001
 
 [sub_resource type="Animation" id="Animation_efkq3"]
 resource_name = "Switch"
@@ -111,13 +117,25 @@ tracks/5/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_cqm8t"]
-length = 0.001
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rmk7q"]
 _data = {
 "RESET": SubResource("Animation_cqm8t"),
 "Switch": SubResource("Animation_efkq3")
+}
+
+[sub_resource type="Animation" id="Animation_mpqiu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BorderOverlay:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_ptkaa"]
@@ -150,34 +168,20 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_mpqiu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BorderOverlay:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ojaca"]
 _data = {
 "RESET": SubResource("Animation_mpqiu"),
 "Switch": SubResource("Animation_ptkaa")
 }
 
-[node name="Terrarium" type="Node2D" node_paths=PackedStringArray("_petsNode", "_terrariumAnimationPlayer", "_temperatureAnimationPlayer", "FocusPoint", "_backgroundSprite", "_objectsSprite", "_groundSprite", "_newGroundSprite", "_temperatureSprite")]
+[node name="Terrarium" type="Node2D" node_paths=PackedStringArray("_petsNode", "_terrariumAnimationPlayer", "_temperatureAnimationPlayer", "FocusPoint", "_temperatureAudioPlayer", "_backgroundSprite", "_objectsSprite", "_groundSprite", "_newGroundSprite", "_temperatureSprite")]
 z_index = 1
 script = ExtResource("1_nu6uy")
 _petsNode = NodePath("Pets")
 _terrariumAnimationPlayer = NodePath("TerrariumAnimation")
 _temperatureAnimationPlayer = NodePath("TemperatureAnimation")
 FocusPoint = NodePath("FocusPoint")
+_temperatureAudioPlayer = NodePath("TemperaturePlayer")
 _backgroundSprite = NodePath("Inside/Background")
 _objectsSprite = NodePath("Inside/Objects")
 _groundSprite = NodePath("Inside/Ground")
@@ -194,6 +198,9 @@ _swampObjectsTexture = ExtResource("9_wjtiy")
 _swampGroundTexture = ExtResource("10_d7btc")
 _coldTemperatureTexture = ExtResource("20_va1s8")
 _hotTemperatureTexture = ExtResource("20_yqf06")
+_coldTemperatureSound = ExtResource("13_6o05l")
+_hotTemperatureSound = ExtResource("14_6l0sx")
+_normalTemperatureSound = ExtResource("15_5chbi")
 
 [node name="ClickableArea" type="Area2D" parent="."]
 
@@ -295,5 +302,7 @@ libraries = {
 libraries = {
 "": SubResource("AnimationLibrary_ojaca")
 }
+
+[node name="TemperaturePlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="input_event" from="ClickableArea" to="." method="Area2DInputEvent"]
