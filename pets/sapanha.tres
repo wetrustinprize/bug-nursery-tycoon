@@ -8,6 +8,6 @@ script = ExtResource("1_osgug")
 Name = "Sapanha"
 FoodType = 1
 Biome = 2
-Temperature = 0
+Temperature = 2
 Personality = 2
 Graphic = ExtResource("1_mwk3d")

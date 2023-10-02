@@ -18,7 +18,7 @@ needs and you need to take care of them.
 
 ## Credits
 
-* Victor Velozo - Music, Art
+* Vritu Velozo - Music, Art
 * Prize - Programming
-* KGeib - Game Design, Testing
+* Valquiria (KGeib) - Game Design, Testing
 * Jack - Art
