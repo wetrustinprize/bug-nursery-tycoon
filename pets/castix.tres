@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="PetType" load_steps=3 format=3 uid="uid://dfoytx4swll6j"]
 
+[ext_resource type="Texture2D" uid="uid://cfrgbg0jiu76h" path="res://graphics/creatures/castix.png" id="1_r6q0k"]
 [ext_resource type="Script" path="res://nodes/Pet/PetType.cs" id="1_xlbxo"]
-[ext_resource type="Texture2D" uid="uid://dydc8ph25rs26" path="res://graphics/prototype/castix.png" id="1_y51ok"]
 
 [resource]
 script = ExtResource("1_xlbxo")
@@ -10,4 +10,4 @@ FoodType = 1
 Biome = 1
 Temperature = 0
 Personality = 8
-Graphic = ExtResource("1_y51ok")
+Graphic = ExtResource("1_r6q0k")

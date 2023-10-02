@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2igns1itlmad"]
+[gd_scene load_steps=10 format=3 uid="uid://d2igns1itlmad"]
 
 [ext_resource type="PackedScene" uid="uid://vtk4gkn10gm8" path="res://nodes/UI/MainMenu/Menu/Menu.tscn" id="1_b4xak"]
 [ext_resource type="PackedScene" uid="uid://cdpiu0d37gls5" path="res://nodes/Terrarium/Terrarium.tscn" id="2_fjimr"]
@@ -6,8 +6,9 @@
 [ext_resource type="Resource" uid="uid://bc3h8b108oiya" path="res://pets/bolongo.tres" id="3_s1g2n"]
 [ext_resource type="Resource" uid="uid://cp3gpqngs1cte" path="res://pets/rapelho.tres" id="4_mkbly"]
 [ext_resource type="Resource" uid="uid://dde0dfnwjkdkv" path="res://pets/cervao.tres" id="5_8kfw4"]
-[ext_resource type="Resource" uid="uid://bb8msjusq3p2u" path="res://pets/jacol.tres" id="6_egyen"]
+[ext_resource type="Resource" uid="uid://crcq7dcua8ptk" path="res://pets/sapanha.tres" id="6_bdvtu"]
 [ext_resource type="PackedScene" uid="uid://ch3lpd3qn0unk" path="res://nodes/Pet/Pet.tscn" id="7_80oho"]
+[ext_resource type="Texture2D" uid="uid://dmcgfx4uy6hv2" path="res://graphics/table.png" id="9_mkgd0"]
 
 [node name="MainMenu" type="Node2D"]
 
@@ -19,8 +20,8 @@ autoplay = true
 
 [node name="Menu" parent="Screen" node_paths=PackedStringArray("_terrarium", "_queueOnStart") instance=ExtResource("1_b4xak")]
 _terrarium = NodePath("../../Terrarium")
-_displayPets = Array[Object]([ExtResource("3_s1g2n"), ExtResource("4_mkbly"), ExtResource("5_8kfw4"), ExtResource("6_egyen")])
-_queueOnStart = [NodePath("../../Terrarium"), NodePath("../../Camera2D")]
+_displayPets = Array[Object]([ExtResource("3_s1g2n"), ExtResource("4_mkbly"), ExtResource("5_8kfw4"), ExtResource("6_bdvtu")])
+_queueOnStart = [NodePath("../../Terrarium"), NodePath("../../Camera2D"), NodePath("../../Table")]
 _petScene = ExtResource("7_80oho")
 
 [node name="Terrarium" parent="." instance=ExtResource("2_fjimr")]
@@ -32,5 +33,11 @@ zoom = Vector2(0.265, 0.265)
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="Table" type="Sprite2D" parent="."]
+z_index = -7
+position = Vector2(189, -208)
+scale = Vector2(3.449, 2.352)
+texture = ExtResource("9_mkgd0")
 
 [connection signal="timeout" from="Timer" to="Screen/Menu" method="ChangeBiomeTimeout"]

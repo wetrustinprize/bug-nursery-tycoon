@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0x3jkpylsuch"]
+[gd_scene load_steps=15 format=3 uid="uid://d0x3jkpylsuch"]
 
 [ext_resource type="Script" path="res://nodes/Game/Game.cs" id="1_ivwcj"]
 [ext_resource type="PackedScene" uid="uid://cdpiu0d37gls5" path="res://nodes/Terrarium/Terrarium.tscn" id="1_mcgtt"]
@@ -9,28 +9,32 @@
 [ext_resource type="Resource" uid="uid://dfnc3o7gj2pdd" path="res://levels/level3.tres" id="4_eoicw"]
 [ext_resource type="Resource" uid="uid://du74p0olbt5ph" path="res://levels/level4.tres" id="5_3cjyq"]
 [ext_resource type="Resource" uid="uid://dqa3qbmpv5rjb" path="res://levels/level5.tres" id="6_65ldy"]
+[ext_resource type="Resource" uid="uid://btyxjrrb5k0ar" path="res://levels/level6.tres" id="7_sxw2w"]
 [ext_resource type="PackedScene" uid="uid://dqhy147sctgww" path="res://nodes/PetBox/PetBox.tscn" id="8_7qk15"]
 [ext_resource type="PackedScene" uid="uid://tq4ie30jt5ph" path="res://nodes/UI/GameUI/GameUI.tscn" id="8_fv3yk"]
 [ext_resource type="AudioStream" uid="uid://cy1mi821tsn36" path="res://sounds/bell-chimes.mp3" id="12_vttju"]
+[ext_resource type="Texture2D" uid="uid://dmcgfx4uy6hv2" path="res://graphics/table.png" id="14_fdgff"]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("_chimesAudioPlayer", "Terrariums", "_petBox") groups=["Game"]]
 script = ExtResource("1_ivwcj")
-_levels = Array[Object]([ExtResource("2_oylsc"), ExtResource("3_ffvjr"), ExtResource("4_eoicw"), ExtResource("5_3cjyq"), ExtResource("6_65ldy")])
+_levels = Array[Object]([ExtResource("2_oylsc"), ExtResource("3_ffvjr"), ExtResource("4_eoicw"), ExtResource("5_3cjyq"), ExtResource("6_65ldy"), ExtResource("7_sxw2w")])
 _chimesAudioPlayer = NodePath("ChimeSound")
 Terrariums = [NodePath("Terrarium"), NodePath("Terrarium2")]
 _petScene = ExtResource("3_h4ehw")
 _petBox = NodePath("PetBox")
 
 [node name="Terrarium2" parent="." instance=ExtResource("1_mcgtt")]
-position = Vector2(1460, -38)
+position = Vector2(1613, 907)
 
 [node name="Terrarium" parent="." instance=ExtResource("1_mcgtt")]
-position = Vector2(-1447, 49)
+position = Vector2(-1299, 828)
 
 [node name="Player" parent="." instance=ExtResource("2_0w8yi")]
+position = Vector2(0, 559)
 
 [node name="PetBox" parent="." instance=ExtResource("8_7qk15")]
-position = Vector2(-108, 1227)
+z_index = 50
+position = Vector2(-173, 1695)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -38,3 +42,9 @@ position = Vector2(-108, 1227)
 
 [node name="ChimeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_vttju")
+
+[node name="Table" type="Sprite2D" parent="."]
+z_index = -7
+position = Vector2(118, 520.5)
+scale = Vector2(3.763, 3.5795)
+texture = ExtResource("14_fdgff")
