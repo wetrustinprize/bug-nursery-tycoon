@@ -85,6 +85,7 @@ public partial class Game : Node2D
         FocusTerrarium(null);
 
         CurrentLevel++;
+        RoundTime = RoundTimer;
 
         if (CurrentLevel >= _levels.Length)
             CurrentLevel = 0;

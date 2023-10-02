@@ -40,5 +40,5 @@ unfocus={
 
 [rendering]
 
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.262745, 0.278431, 0.301961, 1)
