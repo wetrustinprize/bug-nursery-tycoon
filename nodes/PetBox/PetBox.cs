@@ -1,11 +1,16 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 [GlobalClass]
 public partial class PetBox : Node2D
 {
     #region Variables
+
+    [Export] private Sprite2D _outerSprite = null!;
+
+    public bool IsViewingInside = false;
 
     public const float OpacityChangeRate = 2f;
 
@@ -15,13 +20,22 @@ public partial class PetBox : Node2D
 
     public override void _Process(double delta)
     {
-        var currentOpacity = SelfModulate.A;
-        var desiredOpacity = Pets.Count > 0 ? 1.0f : 0.0f;
-        var newOpacity = currentOpacity > desiredOpacity
-            ? Math.Max(currentOpacity - (float)delta * OpacityChangeRate, desiredOpacity)
-            : Math.Min(currentOpacity + (float)delta * OpacityChangeRate, desiredOpacity);
+        Modulate = new Color(
+            1, 1, 1,
+            CalculateDesiredOpacity(Modulate.A, Pets.Count > 0 ? 1.0f : 0.0f, delta)
+        );
 
-        SelfModulate = new Color(1, 1, 1, newOpacity);
+        _outerSprite.Modulate = new Color(
+            1, 1, 1,
+            CalculateDesiredOpacity(_outerSprite.Modulate.A, !IsViewingInside ? 1.0f : 0.0f, delta)
+        );
+    }
+
+    float CalculateDesiredOpacity(float from, float to, double delta)
+    {
+        return from > to
+            ? Math.Max(from - (float)delta * OpacityChangeRate, to)
+            : Math.Min(from + (float)delta * OpacityChangeRate, to);
     }
 
     public void Area2DInputEvent(Node viewport, InputEvent @event, int shapeIdx)

@@ -9,6 +9,10 @@ public partial class Menu : Control
     [Export] private PackedScene _gameScene = null!;
     [Export] private Control _credits = null!;
     [Export] private Control _help = null!;
+    [Export] private Terrarium _terrarium = null!;
+    [Export] private PetType[] _displayPets = null!;
+    [Export] private Node[] _queueOnStart = null!;
+    [Export] private PackedScene _petScene = null!;
 
     #endregion
 
@@ -16,6 +20,14 @@ public partial class Menu : Control
     {
         _credits.Visible = false;
         _help.Visible = false;
+
+        foreach (var pet in _displayPets)
+        {
+            var petNode = _petScene.Instantiate<Pet>();
+            petNode.PetType = pet;
+
+            _terrarium.AddPet(petNode);
+        }
     }
 
     #region Callbacks
@@ -25,6 +37,22 @@ public partial class Menu : Control
         var game = _gameScene.Instantiate();
         GetTree().Root.AddChild(game);
         QueueFree();
+
+        foreach (var node in _queueOnStart)
+            node.QueueFree();
+    }
+
+    public void ChangeBiomeTimeout()
+    {
+        _terrarium.UpdateBiome(
+            _terrarium.Biome switch
+            {
+                PetBiome.Desert => PetBiome.Forest,
+                PetBiome.Forest => PetBiome.Swamp,
+                PetBiome.Swamp => PetBiome.Desert,
+                _ => throw new ArgumentOutOfRangeException()
+            }
+        );
     }
 
     public void OpenHelp()

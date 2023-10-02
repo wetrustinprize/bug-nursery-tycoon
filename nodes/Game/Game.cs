@@ -55,6 +55,10 @@ public partial class Game : Node2D
 
     public override void _Process(double delta)
     {
+        Player.Instance.AddOffset =
+            _petBox.Pets.Count == 0
+            && SelectedFocus == null;
+
         switch (State)
         {
             case GameState.Running:
@@ -267,6 +271,7 @@ public partial class Game : Node2D
         FocusTerrarium(null);
 
         SelectedFocus = _petBox;
+        _petBox.IsViewingInside = true;
 
         Player.Instance.FocusAt(_petBox.Position);
     }
@@ -276,6 +281,7 @@ public partial class Game : Node2D
         if (terrarium == SelectedFocus && terrarium != null) return;
 
         SelectedFocus = terrarium;
+        _petBox.IsViewingInside = false;
 
         if (resetHud)
             PetInformation.Instance.HidePet();

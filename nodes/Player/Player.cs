@@ -8,6 +8,9 @@ public partial class Player : Node2D
     [Export] private Camera2D _camera2D = null!;
     [Export] private float _focusZoom = 0.9f;
     [Export] private float _focusSpeed = 4.0f;
+    [Export] private Vector2 _offset = new Vector2(0, -900);
+
+    public bool AddOffset = false;
 
     private Vector2 _desiredPosition;
     private Vector2 _desiredZoom;
@@ -32,7 +35,11 @@ public partial class Player : Node2D
 
     public override void _PhysicsProcess(double delta)
     {
-        Position = Position.Lerp(_desiredPosition, (float)delta * _focusSpeed);
+        Position = Position.Lerp(
+            _desiredPosition + (AddOffset ? _offset : Vector2.Zero),
+            (float)delta * _focusSpeed
+        );
+
         _camera2D.Zoom = _camera2D.Zoom.Lerp(_desiredZoom, (float)delta * _focusSpeed);
     }
 

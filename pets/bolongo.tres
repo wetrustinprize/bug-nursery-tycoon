@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_4iwb4")
-Name = "Bolongo"
+Name = "Bolonga"
 FoodType = 1
 Biome = 2
 Temperature = 2
