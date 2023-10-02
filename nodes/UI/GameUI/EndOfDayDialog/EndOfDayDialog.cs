@@ -14,6 +14,7 @@ public partial class EndOfDayDialog : Control
 
     [Export] private Label _dayLabel = null!;
     [Export] private Label _avgLabel = null!;
+    [Export] private Button _nextDayButton = null!;
     [Export] private AudioStreamPlayer _clickSound = null!;
     [Export] private AudioStreamPlayer _pirilimSound = null!;
 
@@ -50,8 +51,11 @@ public partial class EndOfDayDialog : Control
         _isVisible = true;
         MouseFilter = MouseFilterEnum.Stop;
 
+        var finishedLevels = result.CurrentLevel + 1 == result.TotalLevels;
+
         _dayLabel.Text = $"Day {result.CurrentLevel + 1}/{result.TotalLevels}";
         _avgLabel.Text = result.AverageHappiness.ToString("P1");
+        _nextDayButton.Text = finishedLevels ? "Restart" : "Next Day";
     }
 
     public void HideDialog()

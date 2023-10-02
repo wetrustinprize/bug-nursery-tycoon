@@ -13,7 +13,7 @@ font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_7e3cr"]
 
-[node name="EndOfDayDialog" type="Control" node_paths=PackedStringArray("_dayLabel", "_avgLabel", "_clickSound", "_pirilimSound")]
+[node name="EndOfDayDialog" type="Control" node_paths=PackedStringArray("_dayLabel", "_avgLabel", "_nextDayButton", "_clickSound", "_pirilimSound")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +24,7 @@ theme = ExtResource("1_4dsv6")
 script = ExtResource("1_dyqim")
 _dayLabel = NodePath("PanelContainer/VBoxContainer/Day")
 _avgLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/Average")
+_nextDayButton = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Next Day Button")
 _clickSound = NodePath("ClickSound")
 _pirilimSound = NodePath("PirilimSound")
 
